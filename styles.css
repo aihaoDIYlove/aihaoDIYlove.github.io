@@ -35,7 +35,7 @@ html, body {
 }
 
 #page-1 {
-    background-image: url('background.png');
+    background-image: url('/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -54,7 +54,7 @@ html, body {
 }
 
 #page-2 {
-    background-image: url('background-page-2.png');
+    background-image: url('/background-page-2.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -273,7 +273,7 @@ html, body {
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('background-page-2.png');
+        background-image: url('/background-page-2.png');
         background-position: center;
         background-repeat: no-repeat;
     }
