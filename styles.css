@@ -83,7 +83,9 @@ body::before {
     font-weight: 500;
     color: #ffffff;
     display: inline-block;
-    min-height: 1.2em;
+    height: 1.2em;
+    line-height: 1.2em;
+    vertical-align: bottom;
 }
 
 .cursor {
@@ -91,6 +93,7 @@ body::before {
     color: #ffffff;
     animation: blink 1s infinite;
     margin-left: 2px;
+    vertical-align: bottom;
 }
 
 @keyframes blink {
