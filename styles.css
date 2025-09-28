@@ -1,4 +1,6 @@
-/* 全局样式重置 */
+/* ========================================
+   全局样式重置和基础设置
+   ======================================== */
 * {
     margin: 0;
     padding: 0;
@@ -11,10 +13,15 @@ html, body {
     width: 100%;
     height: 100%;
     overflow: hidden; /* 隐藏滚动条 */
+    /* 字体设置 - 可调整字体族 */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 全局文字颜色 - 白色 #ffffff */
     color: #ffffff;
 }
 
+/* ========================================
+   滚动容器和页面布局设置
+   ======================================== */
 .scroll-container {
     width: 100%;
     height: 100%;
@@ -25,7 +32,8 @@ html, body {
 
 .page {
     width: 100%;
-    height: 100vh; /* 确保每个页面都占满整个视口 */
+    /* 页面高度 - 占满整个视口 */
+    height: 100vh;
     scroll-snap-align: start;
     position: relative;
     display: flex;
@@ -34,14 +42,21 @@ html, body {
     overflow: hidden; /* 确保页面内容不会溢出 */
 }
 
+/* ========================================
+   第一页背景设置
+   ======================================== */
 #page-1 {
+    /* 背景图片路径 - 可修改为其他图片 */
     background-image: url('/background.png');
+    /* 背景尺寸 - cover确保图片覆盖整个区域 */
     background-size: cover;
+    /* 背景位置 - 居中显示 */
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
 }
 
+/* 第一页遮罩层 - 调整透明度可改变暗化程度 */
 #page-1::before {
     content: '';
     position: absolute;
@@ -49,13 +64,20 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
+    /* 遮罩颜色和透明度 - rgba(0, 0, 0, 0.4) 黑色40%透明度 */
     background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
+/* ========================================
+   第二页背景设置
+   ======================================== */
 #page-2 {
+    /* 背景图片路径 - 可修改为其他图片 */
     background-image: url('/background-page-2.png');
+    /* 背景尺寸 - cover确保图片覆盖整个区域 */
     background-size: cover;
+    /* 背景位置 - 居中显示 */
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -66,10 +88,15 @@ html, body {
     z-index: 2; /* 确保内容在遮罩层之上 */
 }
 
-/* 顶部标题区域 */
+/* ========================================
+   顶部标题区域样式 - 打字机效果
+   ======================================== */
 .header {
+    /* 位置设置 - 固定在左上角 */
     position: fixed;
+    /* 距离顶部距离 - 可调整 */
     top: 30px;
+    /* 距离左侧距离 - 可调整 */
     left: 30px;
     z-index: 999;
     padding: 0;
@@ -82,215 +109,479 @@ html, body {
     align-items: flex-end;
 }
 
+/* 对话框样式 */
 .dialog-box {
+    /* 背景颜色 - 半透明深灰色 rgba(26, 26, 26, 0.9) */
     background-color: rgba(26, 26, 26, 0.9);
+    /* 边框颜色和宽度 - #333 深灰色 2px */
     border: 2px solid #333;
+    /* 圆角大小 - 8px */
     border-radius: 8px;
+    /* 内边距 - 上下12px 左右20px */
     padding: 12px 20px;
+    /* 阴影效果 - 白色10%透明度 */
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
     position: relative;
+    /* 最小宽度 - 200px */
     min-width: 200px;
     text-align: center;
     margin-top: 0;
+    /* 毛玻璃效果 - 10px模糊 */
     backdrop-filter: blur(10px);
 }
 
+/* 对话框箭头 */
 .dialog-box::before {
     content: '';
     position: absolute;
+    /* 箭头位置 - 距离顶部-8px */
     top: -8px;
     left: 50%;
     transform: translateX(-50%);
     width: 0;
     height: 0;
+    /* 箭头形状 - 8px三角形，颜色#333 */
     border-left: 8px solid transparent;
     border-right: 8px solid transparent;
     border-bottom: 8px solid #333;
 }
 
+/* 打字机文本样式 */
 #typewriter-text {
+    /* 字体大小 - 18px */
     font-size: 18px;
+    /* 字体粗细 - 500中等粗细 */
     font-weight: 500;
+    /* 文字颜色 - 白色 #ffffff */
     color: #ffffff;
     display: inline-block;
+    /* 文本高度 - 1.2倍行高 */
     height: 1.2em;
     line-height: 1.2em;
     vertical-align: bottom;
 }
 
+/* 光标样式 */
 .cursor {
+    /* 光标字体大小 - 18px */
     font-size: 18px;
+    /* 光标颜色 - 白色 #ffffff */
     color: #ffffff;
+    /* 闪烁动画 - 1秒无限循环 */
     animation: blink 1s infinite;
+    /* 光标左边距 - 2px */
     margin-left: 2px;
     vertical-align: bottom;
 }
 
+/* 光标闪烁动画 */
 @keyframes blink {
     0%, 50% {
-        opacity: 1;
+        opacity: 1; /* 显示 */
     }
     51%, 100% {
-        opacity: 0;
+        opacity: 0; /* 隐藏 */
     }
 }
 
-/* 右上角社交媒体图标 */
+/* ========================================
+   右上角社交媒体图标导航
+   ======================================== */
 .social-nav {
+    /* 位置设置 - 固定在右上角 */
     position: fixed;
+    /* 距离顶部距离 - 30px，可调整 */
     top: 30px;
+    /* 距离右侧距离 - 30px，可调整 */
     right: 30px;
     display: flex;
+    /* 图标间距 - 20px，可调整 */
     gap: 20px;
     z-index: 1000;
 }
 
+/* 社交媒体链接样式 */
 .social-link {
     display: flex;
     align-items: center;
     justify-content: center;
+    /* 图标容器尺寸 - 50x50px，可调整大小 */
     width: 50px;
     height: 50px;
+    /* 背景颜色 - 半透明深灰色 rgba(26, 26, 26, 0.9) */
     background-color: rgba(26, 26, 26, 0.9);
+    /* 边框 - 2px #333深灰色 */
     border: 2px solid #333;
+    /* 圆角 - 50%完全圆形 */
     border-radius: 50%;
+    /* 图标颜色 - 白色 #ffffff */
     color: #ffffff;
     text-decoration: none;
+    /* 过渡动画 - 0.3秒平滑过渡 */
     transition: all 0.3s ease;
+    /* 阴影效果 - 白色10%透明度 */
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    /* 毛玻璃效果 - 10px模糊 */
     backdrop-filter: blur(10px);
 }
 
+/* 社交媒体链接悬停效果 */
 .social-link:hover {
+    /* 悬停背景颜色 - #333深灰色 */
     background-color: #333;
+    /* 悬停边框颜色 - #555中灰色 */
     border-color: #555;
+    /* 悬停上移效果 - 向上2px */
     transform: translateY(-2px);
+    /* 悬停阴影增强 - 白色20%透明度 */
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
 
+/* 社交媒体图标尺寸 */
 .social-icon {
+    /* 图标尺寸 - 24x24px，可调整 */
     width: 24px;
     height: 24px;
     fill: currentColor;
 }
 
-/* GitHub图标特殊样式 */
+/* ========================================
+   各平台特殊悬停颜色
+   ======================================== */
+/* GitHub图标特殊悬停样式 */
 #github-link:hover {
+    /* GitHub品牌色 - 浅灰色 #f0f6fc */
     color: #f0f6fc;
+    /* GitHub背景色 - 深灰色 #21262d */
     background-color: #21262d;
 }
 
-/* Bilibili图标特殊样式 */
+/* Bilibili图标特殊悬停样式 */
 #bilibili-link:hover {
+    /* Bilibili品牌色 - 蓝色 #00a1d6 */
     color: #00a1d6;
     background-color: #1a1a1a;
 }
 
-/* 知乎图标特殊样式 */
+/* 知乎图标特殊悬停样式 */
 #zhihu-link:hover {
+    /* 知乎品牌色 - 蓝色 #0084ff */
     color: #0084ff;
     background-color: #1a1a1a;
 }
 
-/* 主要内容区域 */
+/* ========================================
+   主要内容区域样式
+   ======================================== */
 .main-content {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    /* 内容区域内边距 - 上下40px 左右20px */
     padding: 40px 20px;
 }
 
 .content-wrapper {
     text-align: center;
+    /* 内容最大宽度 - 800px */
     max-width: 800px;
 }
 
+/* 主标题样式 */
 .content-wrapper h1 {
+    /* 标题字体大小 - 3rem，可调整 */
     font-size: 3rem;
+    /* 标题下边距 - 20px */
     margin-bottom: 20px;
+    /* 渐变文字效果 - 白色到浅灰色45度渐变 */
     background: linear-gradient(45deg, #ffffff, #cccccc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
+/* 段落文字样式 */
 .content-wrapper p {
+    /* 段落字体大小 - 1.2rem，可调整 */
     font-size: 1.2rem;
+    /* 段落文字颜色 - 浅灰色 #cccccc */
     color: #cccccc;
+    /* 行高 - 1.6倍 */
     line-height: 1.6;
 }
 
-/* 响应式设计 */
+/* ========================================
+   响应式设计 - 移动端适配
+   ======================================== */
 @media (max-width: 768px) {
+    /* 移动端标题区域调整 */
     .header {
+        /* 移动端顶部距离 - 20px */
         top: 20px;
+        /* 移动端左侧距离 - 20px */
         left: 20px;
     }
     
+    /* 移动端社交媒体导航调整 */
     .social-nav {
+        /* 移动端顶部距离 - 20px */
         top: 20px;
+        /* 移动端右侧距离 - 20px */
         right: 20px;
+        /* 移动端图标间距 - 15px */
         gap: 15px;
     }
     
+    /* 移动端社交媒体链接尺寸调整 */
     .social-link {
+        /* 移动端图标容器尺寸 - 40x40px */
         width: 40px;
         height: 40px;
     }
     
+    /* 移动端社交媒体图标尺寸调整 */
     .social-icon {
+        /* 移动端图标尺寸 - 20x20px */
         width: 20px;
         height: 20px;
     }
     
+    /* 移动端对话框调整 */
     .dialog-box {
+        /* 移动端对话框最小宽度 - 160px */
         min-width: 160px;
+        /* 移动端对话框内边距 - 上下10px 左右16px */
         padding: 10px 16px;
         margin-top: 0;
     }
     
+    /* 移动端打字机文本和光标字体调整 */
     #typewriter-text, .cursor {
+        /* 移动端字体大小 - 16px */
         font-size: 16px;
     }
     
+    /* 移动端主标题字体调整 */
     .content-wrapper h1 {
+        /* 移动端标题字体大小 - 2rem */
         font-size: 2rem;
     }
     
+    /* 移动端段落文字调整 */
     .content-wrapper p {
+        /* 移动端段落字体大小 - 1rem */
         font-size: 1rem;
     }
+}
 
+/* ========================================
+   音乐播放器样式 - 半透明毛玻璃效果
+   ======================================== */
+/* 音乐播放器容器 - 只在第二页显示 */
+.music-player {
+    /* 固定定位 - 左下角 */
+    position: fixed !important;
+    /* 距离底部距离 - 12px，可调整 */
+    bottom: 12px !important;
+    /* 距离左侧距离 - 12px，可调整 */
+    left: 12px !important;
+    /* 播放器宽度 - 180px，可调整 */
+    width: 180px !important;
+    z-index: 1000 !important;
+    /* 背景颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* 圆角大小 - 12px */
+    border-radius: 12px !important;
+    /* 阴影效果 - 黑色15%透明度 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    /* 毛玻璃效果 - 15px模糊 */
+    backdrop-filter: blur(15px) !important;
+    /* 边框 - 1px半透明白色 */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    /* 默认隐藏 */
+    display: none !important;
+    /* 最小高度 - 60px */
+    min-height: 60px !important;
+    /* 平滑过渡效果 - 0.3秒缓入缓出 */
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* 播放器显示控制 - 只在第二页可见时显示 */
+#page-2.visible .music-player,
+#page-2.visible #aplayer {
+    display: block !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+}
+
+/* APlayer播放器容器样式 */
+#aplayer {
+    /* 固定定位 - 左下角 */
+    position: fixed !important;
+    /* 距离底部距离 - 10px，可调整 */
+    bottom: 10px !important;
+    /* 距离左侧距离 - 10px，可调整 */
+    left: 10px !important;
+    /* 播放器宽度 - 250px，可调整 */
+    width: 250px !important;
+    z-index: 1000 !important;
+    /* 背景颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* 圆角大小 - 12px */
+    border-radius: 15px !important;
+    /* 阴影效果 - 黑色15%透明度 */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    /* 毛玻璃效果 - 15px模糊 */
+    backdrop-filter: blur(15px) !important;
+    /* 边框 - 1px半透明白色 */
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    /* 默认隐藏 */
+    display: none !important;
+    /* 最小高度 - 40px */
+    min-height: 40px !important;
+    /* 平滑过渡效果 - 0.3秒缓入缓出 */
+    opacity: 0 !important;
+    transform: translateY(20px) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* ========================================
+   APlayer内部元素半透明样式定制
+   ======================================== */
+/* 播放器信息区域 */
+#aplayer .aplayer-info {
+    /* 信息区域背景 - 半透明白色 rgba(255, 255, 255, 0.1) */
+    background: rgba(255, 255, 255, 0.1) !important;
+    /* 信息区域圆角 - 6px */
+    border-radius: 6px !important;
+}
+
+/* 播放器控制区域 - 设为纯透明但保持功能 */
+#aplayer .aplayer-controller {
+    /* 控制区域背景 - 完全透明 */
+    background: transparent !important;
+    /* 移除圆角 */
+    border-radius: 0 !important;
+}
+
+/* 进度条容器 */
+#aplayer .aplayer-bar-wrap {
+    /* 进度条容器背景 - 完全透明 */
+    background: transparent !important;
+    /* 进度条圆角 - 3px */
+    border-radius: 3px !important;
+}
+
+/* 缓冲进度条 - 恢复显示 */
+#aplayer .aplayer-loaded {
+    /* 缓冲进度条颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* 已播放进度条 */
+#aplayer .aplayer-played {
+    /* 已播放颜色 - 半透明白色 rgba(255, 255, 255, 0.8) */
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 音量条容器 */
+#aplayer .aplayer-volume-bar {
+    /* 音量条背景 - 半透明白色 rgba(255, 255, 255, 0.2) */
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* 音量条 */
+#aplayer .aplayer-volume-bar .aplayer-volume {
+    /* 音量条颜色 - 半透明白色 rgba(255, 255, 255, 0.8) */
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* 艺术家名称文本颜色 - 设置为白色 */
+#aplayer .aplayer-author {
+    /* 艺术家名称颜色 - 白色 #ffffff */
+    color: #ffffff !important;
+}
+
+/* ========================================
+   响应式设计 - 音乐播放器适配
+   ======================================== */
+/* 桌面端音乐播放器调整 */
+@media (min-width: 769px) {
+    .music-player, #aplayer {
+        /* 桌面端播放器宽度 - 250px */
+        width: 250px !important;
+        /* 桌面端底部距离 - 20px */
+        bottom: 10px !important;
+        /* 桌面端左侧距离 - 20px */
+        left: 10px !important;
+    }
+}
+
+/* 移动端音乐播放器调整 */
+@media (max-width: 768px) {
+    .music-player, #aplayer {
+        /* 移动端播放器宽度 - 240px（调小了40px） */
+        width: 240px !important;
+        /* 移动端底部距离 - 15px */
+        bottom: 15px !important;
+        /* 移动端左侧距离 - 15px */
+        left: 15px !important;
+    }
+}
+
+/* ========================================
+   小屏幕移动端特殊处理
+   ======================================== */
+/* 小屏幕移动端音乐播放器调整 */
+@media (max-width: 480px) {
+    .music-player {
+        /* 小屏幕播放器宽度 - 自适应减去40px边距 */
+        width: calc(100% - 40px);
+        /* 小屏幕左侧距离 - 20px */
+        left: 20px;
+        /* 小屏幕底部距离 - 20px */
+        bottom: 20px;
+    }
+
+    /* 小屏幕第二页背景处理 */
     #page-2 {
         position: relative;
         background: none; /* 移除桌面端背景 */
     }
 
+    /* 小屏幕背景双层处理 */
     #page-2::before, #page-2::after {
         content: '';
         position: absolute;
         left: 0;
         width: 100%;
         height: 100%;
+        /* 背景图片路径 - 与桌面端相同 */
         background-image: url('/background-page-2.png');
         background-position: center;
         background-repeat: no-repeat;
     }
 
-    /* 底层：裁剪并模糊化 */
+    /* 底层：裁剪并模糊化背景 */
     #page-2::before {
         top: 0;
-        background-size: cover; /* 裁剪以填充 */
+        /* 背景尺寸 - cover裁剪填充 */
+        background-size: cover;
+        /* 模糊效果 - 20px模糊 */
         filter: blur(20px);
         z-index: 1;
     }
 
-    /* 顶层：居中并按宽度缩放 */
+    /* 顶层：居中并按宽度缩放背景 */
     #page-2::after {
         top: 50%;
         transform: translateY(-50%);
-        background-size: contain; /* 按宽度缩放，保持比例 */
+        /* 背景尺寸 - contain按宽度缩放保持比例 */
+        background-size: contain;
         z-index: 2;
     }
 }
+
