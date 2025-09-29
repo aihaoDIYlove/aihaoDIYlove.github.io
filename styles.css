@@ -7,8 +7,8 @@ select,
 summary,
 textarea,
 [tabindex] {
-    -ms-touch-action: manipulation;
     touch-action: manipulation;
+    -ms-touch-action: manipulation;
 }
 
 .screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
