@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章详情 - 个人网站</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    
+    <!-- 引入marked.js用于Markdown渲染 - 使用v4版本以兼容旧版浏览器 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
+    
+    <!-- 引入highlight.js用于代码高亮 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    
+    <!-- 引入KaTeX用于数学公式渲染 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        /* 重置全局样式，允许滚动 */
+        html, body {
+            overflow: auto !important;
+            height: auto !important;
+        }
+        
+        /* 为文章页面添加主页背景图片 */
+        body {
+            background-image: url('/background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+        
+        /* 文章详情页专用样式 */
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 80px;
+            margin-bottom: 40px;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .article-title {
+            font-size: 2.5em;
+            color: #ffffff;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .article-meta {
+            color: #f0f0f0;
+            font-size: 0.9em;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .article-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .article-tags {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .tag {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            text-decoration: none;
+            transition: transform 0.2s;
+        }
+        
+        .tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        .article-content {
+            line-height: 1.8;
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+        
+        .article-content h1,
+        .article-content h2,
+        .article-content h3,
+        .article-content h4,
+        .article-content h5,
+        .article-content h6 {
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        }
+        
+        .article-content h1 {
+            font-size: 2.2em;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 8px;
+        }
+        
+        .article-content h3 {
+            font-size: 1.5em;
+            color: #ffffff;
+        }
+        
+        .article-content p {
+            margin-bottom: 15px;
+        }
+        
+        .article-content code {
+            background: #f8f9fa;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            color: #e83e8c;
+        }
+        
+        .article-content pre {
+            background: #2d3748;
+            color: #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .article-content pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            font-style: italic;
+            color: #ffffff;
+            border-radius: 0 8px 8px 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-left: 4px solid #3498db;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .article-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .article-content th,
+        .article-content td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+        
+        .article-content th {
+            background: rgba(52, 152, 219, 0.3);
+            color: #ffffff;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        
+        .article-content tr:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .article-content ul,
+        .article-content ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        
+        .article-content li {
+            margin-bottom: 8px;
+        }
+        
+        /* 返回博客按钮 - 半圆形设计，参照移动端展开按钮 */
+        .back-to-blog-btn {
+            position: fixed;
+            left: 0;
+            top: 20%; /* 左上角位置 */
+            width: 40px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: none;
+            border-radius: 0 30px 30px 0; /* 右侧半圆形 */
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+            outline: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-to-blog-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateX(2px);
+        }
+        
+        .back-to-blog-btn svg {
+            width: 20px;
+            height: 20px;
+            margin-left: 4px; /* 稍微向右偏移 */
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2em;
+            color: #666;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 50px;
+            color: #e74c3c;
+        }
+        
+        .error h2 {
+            margin-bottom: 15px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .article-container {
+                margin: 60px 10px 20px;
+                padding: 15px;
+            }
+            
+            .article-title {
+                font-size: 2em;
+            }
+            
+            .article-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .back-to-blog-btn {
+                top: 15%; /* 移动端稍微调整位置 */
+                width: 35px;
+                height: 50px;
+            }
+            
+            .back-to-blog-btn svg {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="back-to-blog-btn" onclick="goBackToBlog()" aria-label="返回博客">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m15 18-6-6 6-6"/>
+        </svg>
+    </button>
+    
+    <div class="article-container">
+        <div id="loading" class="loading">
+            <p>正在加载文章...</p>
+        </div>
+        
+        <div id="error" class="error" style="display: none;">
+            <h2>加载失败</h2>
+            <p>无法加载文章内容，请稍后重试。</p>
+        </div>
+        
+        <div id="article" style="display: none;">
+            <div class="article-header">
+                <h1 class="article-title" id="article-title"></h1>
+                <div class="article-meta">
+                    <span>📅 <span id="article-date"></span></span>
+                    <span>📝 <span id="article-filename"></span></span>
+                </div>
+                <div class="article-tags" id="article-tags"></div>
+            </div>
+            <div class="article-content" id="article-content"></div>
+        </div>
+    </div>
+    
+    <script>
+        // 配置marked选项 - 兼容v4版本的API
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            highlight: function(code, lang) {
+                if (lang && hljs.getLanguage(lang)) {
+                    try {
+                        return hljs.highlight(code, { language: lang }).value;
+                    } catch (err) {}
+                }
+                return hljs.highlightAuto(code).value;
+            }
+        });
+        
+        // 获取URL参数
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+        
+        // 渲染数学公式
+        function renderMath() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '$$', right: '$$', display: true},
+                    {left: '$', right: '$', display: false},
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ]
+            });
+        }
+        
+        // 加载文章
+        async function loadArticle() {
+            try {
+                const articleId = getUrlParameter('id');
+                console.log('文章ID:', articleId);
+                
+                if (!articleId) {
+                    throw new Error('未指定文章ID');
+                }
+                
+                // 获取博客数据
+                console.log('正在获取博客数据...');
+                const response = await fetch('./data/blog-posts.json');
+                console.log('响应状态:', response.status, response.statusText);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const blogPosts = await response.json();
+                console.log('博客数据加载成功，文章数量:', blogPosts.length);
+                
+                const article = blogPosts.find(post => post.id === articleId);
+                console.log('找到的文章:', article ? article.title : '未找到');
+                
+                if (!article) {
+                    throw new Error('文章不存在');
+                }
+                
+                // 更新页面标题
+                document.title = `${article.title} - 个人网站`;
+                
+                // 渲染文章内容
+                document.getElementById('article-title').textContent = article.title;
+                document.getElementById('article-date').textContent = article.date;
+                document.getElementById('article-filename').textContent = article.filename;
+                
+                // 渲染标签
+                const tagsContainer = document.getElementById('article-tags');
+                tagsContainer.innerHTML = '';
+                if (article.tags && article.tags.length > 0) {
+                    article.tags.forEach(tag => {
+                        const tagElement = document.createElement('span');
+                        tagElement.className = 'tag';
+                        tagElement.textContent = tag;
+                        tagsContainer.appendChild(tagElement);
+                    });
+                }
+                
+                // 渲染Markdown内容 - 使用v4版本的API
+                const contentHtml = marked.parse(article.content);
+                document.getElementById('article-content').innerHTML = contentHtml;
+                
+                // 渲染数学公式
+                renderMath();
+                
+                // 显示文章，隐藏加载状态
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('article').style.display = 'block';
+                
+                console.log('文章加载完成');
+                
+            } catch (error) {
+                console.error('加载文章失败:', error);
+                console.error('错误详情:', {
+                    message: error.message,
+                    stack: error.stack,
+                    url: window.location.href,
+                    userAgent: navigator.userAgent
+                });
+                
+                // 显示更详细的错误信息
+                const errorDiv = document.getElementById('error');
+                const errorMessage = errorDiv.querySelector('p');
+                errorMessage.innerHTML = `
+                    无法加载文章内容，请稍后重试。<br>
+                    <small style="color: #666; margin-top: 10px; display: block;">
+                        错误详情: ${error.message}<br>
+                        当前URL: ${window.location.href}
+                    </small>
+                `;
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+        
+        // 返回博客功能
+        function goBackToBlog() {
+            // 优先使用浏览器历史记录返回
+            if (document.referrer && document.referrer.includes(window.location.origin)) {
+                window.history.back();
+            } else {
+                // 如果没有历史记录或不是从本站跳转来的，直接跳转到首页博客部分
+                window.location.href = 'index.html#blog';
+            }
+        }
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', loadArticle);
+    </script>
+</body>
+</html>

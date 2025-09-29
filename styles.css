@@ -1,3 +1,190 @@
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea,
+[tabindex] {
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+
+.screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+}
+
+/* ========================================
+   文章列表样式
+   ======================================== */
+.article-list-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 320px;
+    max-height: 400px;
+    background: rgba(0, 0, 0, 0.7);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    /* 默认隐藏文章列表 */
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+}
+
+/* 只在第一页显示文章列表 */
+#page-1.visible .article-list-container {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.search-header {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.search-input {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    padding: 8px 12px;
+    color: #ffffff;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-input:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.search-icon {
+    margin-left: 8px;
+    width: 20px;
+    height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.search-icon:hover {
+    color: #ffffff;
+}
+
+.search-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+.article-list {
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 8px;
+    /* 添加平滑滚动效果 */
+    scroll-behavior: smooth;
+}
+
+.article-item {
+    padding: 12px;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    /* 添加滚动动画效果 */
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideInUp 0.6s ease forwards;
+}
+
+/* 为每个文章项添加延迟动画 */
+.article-item:nth-child(1) { animation-delay: 0.1s; }
+.article-item:nth-child(2) { animation-delay: 0.2s; }
+.article-item:nth-child(3) { animation-delay: 0.3s; }
+.article-item:nth-child(4) { animation-delay: 0.4s; }
+.article-item:nth-child(5) { animation-delay: 0.5s; }
+
+/* 滑入动画关键帧 */
+@keyframes slideInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.article-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.article-item:last-child {
+    margin-bottom: 0;
+}
+
+.article-item h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #ffffff;
+    line-height: 1.3;
+}
+
+.article-item p {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 6px;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2; /* 标准属性，用于兼容性 */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.article-date {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* 滚动条样式 */
+.article-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.article-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.article-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.article-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
 /* ========================================
    全局样式重置和基础设置
    ======================================== */
@@ -43,17 +230,17 @@ html, body {
 }
 
 /* ========================================
-   第一页背景设置
+   第一页背景设置 (主页面)
    ======================================== */
 #page-1 {
-    /* 背景图片路径 - 可修改为其他图片 */
-    background-image: url('/background.png');
+    /* 背景图片路径 - 原主页背景 */
+    background-image: url('/background.png') !important;
     /* 背景尺寸 - cover确保图片覆盖整个区域 */
-    background-size: cover;
+    background-size: cover !important;
     /* 背景位置 - 居中显示 */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
 }
 
 /* 第一页遮罩层 - 调整透明度可改变暗化程度 */
@@ -70,16 +257,30 @@ html, body {
 }
 
 /* ========================================
-   第二页背景设置
+   第二页背景设置 (音乐页面)
    ======================================== */
 #page-2 {
-    /* 背景图片路径 - 可修改为其他图片 */
-    background-image: url('/background-page-2.png');
+    /* 背景图片路径 - 音乐页面背景 */
+    background-image: url('/background-page-2.png') !important;
     /* 背景尺寸 - cover确保图片覆盖整个区域 */
-    background-size: cover;
+    background-size: cover !important;
     /* 背景位置 - 居中显示 */
-    background-position: center;
-    background-repeat: no-repeat;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
+/* ========================================
+   第三页背景设置 (音乐页面)
+   ======================================== */
+#page-3 {
+    /* 背景图片路径 - 原第二页背景 */
+    background-image: url('/background-page-2.png') !important;
+    /* 背景尺寸 - cover确保图片覆盖整个区域 */
+    background-size: cover !important;
+    /* 背景位置 - 居中显示 */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
 }
 
 .container {
@@ -127,6 +328,7 @@ html, body {
     text-align: center;
     margin-top: 0;
     /* 毛玻璃效果 - 10px模糊 */
+    -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
 }
 
@@ -192,8 +394,8 @@ html, body {
     position: fixed;
     /* 距离顶部距离 - 30px，可调整 */
     top: 30px;
-    /* 距离右侧距离 - 30px，可调整 */
-    right: 30px;
+    /* 距离右侧距离 - 30px，与顶部距离保持一致 */
+    right: 40px;
     display: flex;
     /* 图标间距 - 20px，可调整 */
     gap: 20px;
@@ -205,11 +407,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* 图标容器尺寸 - 50x50px，可调整大小 */
-    width: 50px;
-    height: 50px;
+    /* 图标容器尺寸 - 调整为与打字机框框高度匹配 */
+    width: 56px;
+    height: 56px;
     /* 背景颜色 - 半透明深灰色 rgba(26, 26, 26, 0.9) */
     background-color: rgba(26, 26, 26, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     /* 边框 - 2px #333深灰色 */
     border: 2px solid #333;
     /* 圆角 - 50%完全圆形 */
@@ -239,9 +443,9 @@ html, body {
 
 /* 社交媒体图标尺寸 */
 .social-icon {
-    /* 图标尺寸 - 24x24px，可调整 */
-    width: 24px;
-    height: 24px;
+    /* 图标尺寸 - 调整为与按钮尺寸匹配 */
+    width: 26px;
+    height: 26px;
     fill: currentColor;
 }
 
@@ -378,7 +582,7 @@ html, body {
 /* ========================================
    音乐播放器样式 - 半透明毛玻璃效果
    ======================================== */
-/* 音乐播放器容器 - 只在第二页显示 */
+/* 音乐播放器容器 - 只在第三页显示 */
 .music-player {
     /* 固定定位 - 左下角 */
     position: fixed !important;
@@ -395,26 +599,62 @@ html, body {
     border-radius: 12px !important;
     /* 阴影效果 - 黑色15%透明度 */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    /* 毛玻璃效果 - 15px模糊 */
+    /* 毛玻璃效果 - 15px模糊 - 添加webkit前缀 */
+    -webkit-backdrop-filter: blur(15px) !important;
     backdrop-filter: blur(15px) !important;
     /* 边框 - 1px半透明白色 */
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
     /* 默认隐藏 */
     display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
     /* 最小高度 - 60px */
     min-height: 60px !important;
     /* 平滑过渡效果 - 0.3秒缓入缓出 */
-    opacity: 0 !important;
+    -webkit-transform: translateY(20px) !important;
     transform: translateY(20px) !important;
+    -webkit-transition: all 0.3s ease-in-out !important;
     transition: all 0.3s ease-in-out !important;
+    /* Chrome移动端兼容性 - 强制显示 */
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    will-change: transform, opacity !important;
+    /* 强制渲染层 */
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
 }
 
 /* 播放器显示控制 - 只在第二页可见时显示 */
 #page-2.visible .music-player,
 #page-2.visible #aplayer {
     display: block !important;
+    visibility: visible !important;
     opacity: 1 !important;
+    -webkit-transform: translateY(0) !important;
     transform: translateY(0) !important;
+    /* 确保层级 */
+    z-index: 1000 !important;
+    /* Chrome移动端强制显示 - 更激进的方式 */
+    -webkit-appearance: initial !important;
+    appearance: initial !important;
+    pointer-events: auto !important;
+    /* 强制渲染 */
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    /* 强制重绘 */
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
+    /* 确保内容可见 */
+    overflow: visible !important;
+    /* 移除任何可能的遮罩 */
+    -webkit-mask: none !important;
+    mask: none !important;
+    /* 强制硬件加速 */
+    -webkit-transform: translateZ(0) translateY(0) !important;
+    transform: translateZ(0) translateY(0) !important;
+    /* 强制显示 */
+    contain: none !important;
+    isolation: auto !important;
 }
 
 /* APlayer播放器容器样式 */
@@ -430,11 +670,12 @@ html, body {
     z-index: 1000 !important;
     /* 背景颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
     background: rgba(255, 255, 255, 0.1) !important;
-    /* 圆角大小 - 12px */
+    /* 圆角大小 - 15px */
     border-radius: 15px !important;
     /* 阴影效果 - 黑色15%透明度 */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    /* 毛玻璃效果 - 15px模糊 */
+    /* 毛玻璃效果 - 15px模糊 - 添加webkit前缀 */
+    -webkit-backdrop-filter: blur(15px) !important;
     backdrop-filter: blur(15px) !important;
     /* 边框 - 1px半透明白色 */
     border: 1px solid rgba(255, 255, 255, 0.2) !important;
@@ -444,7 +685,9 @@ html, body {
     min-height: 40px !important;
     /* 平滑过渡效果 - 0.3秒缓入缓出 */
     opacity: 0 !important;
+    -webkit-transform: translateY(20px) !important;
     transform: translateY(20px) !important;
+    -webkit-transition: all 0.3s ease-in-out !important;
     transition: all 0.3s ease-in-out !important;
 }
 
@@ -549,7 +792,7 @@ html, body {
     /* 小屏幕第二页背景处理 */
     #page-2 {
         position: relative;
-        background: none; /* 移除桌面端背景 */
+        background: none !important; /* 移除桌面端背景 */
     }
 
     /* 小屏幕背景双层处理 */
@@ -578,10 +821,710 @@ html, body {
     /* 顶层：居中并按宽度缩放背景 */
     #page-2::after {
         top: 50%;
-        transform: translateY(-50%);
+        transform: translateY(calc(-50% - 120px));
         /* 背景尺寸 - contain按宽度缩放保持比例 */
         background-size: contain;
         z-index: 2;
     }
+
+    /* 确保内容层在背景层之上 */
+    #page-2 .content-wrapper {
+        position: relative;
+        z-index: 3;
+    }
+
+    /* 确保音乐播放器在背景层之上 */
+    #page-2 .music-player, #page-2 #aplayer {
+        position: fixed !important;
+        z-index: 1000 !important;
+    }
 }
+
+/* ========================================
+   浮动按钮通用样式
+   ======================================== */
+.floating-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    /* 添加webkit前缀以提高Chrome移动端兼容性 */
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+}
+
+.floating-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.floating-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+/* 搜索按钮默认隐藏 */
+.search-btn {
+    display: none;
+}
+
+/* 博客页面专用搜索按钮 - 使用JavaScript控制显示 */
+.search-btn.blog-only {
+    display: none;
+}
+
+/* 博客按钮默认隐藏 */
+.blog-btn {
+    display: none;
+}
+
+/* 主页专用博客按钮 - 使用JavaScript控制显示 */
+.blog-btn.main-only {
+    display: none;
+}
+
+/* ========================================
+   第三页 - 博客页面样式
+   ======================================== */
+#page-3 {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    padding: 40px 20px;
+}
+
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 博客页面标题 */
+.blog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    background: linear-gradient(45deg, #ffffff, #cccccc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.blog-header p {
+    font-size: 1.2rem;
+    color: #cccccc;
+}
+
+/* 博客内容区域 */
+.blog-content {
+    flex: 1;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+.blog-posts {
+    display: grid;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+}
+
+/* 博客文章卡片 */
+.blog-post {
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    transition: all 0.3s ease;
+}
+
+.blog-post:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.blog-post h2 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.post-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.post-date {
+    color: #cccccc;
+}
+
+.post-category {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: #ffffff;
+}
+
+.post-excerpt {
+    color: #cccccc;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.read-more {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.read-more:hover {
+    border-bottom-color: #ffffff;
+}
+
+/* 搜索容器 */
+.search-container {
+    position: fixed;
+    bottom: 30px;
+    right: 100px;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    padding: 8px;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.search-container.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #ffffff;
+    padding: 8px 15px;
+    width: 250px;
+    font-size: 14px;
+}
+
+.search-input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-submit {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-submit:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.search-submit svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .blog-header h1 {
+        font-size: 2rem;
+    }
+    
+    .blog-posts {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .search-container {
+        right: 80px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+
+/* 搜索结果样式 */
+.no-results-message,
+.no-posts-message,
+.error-message {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    margin: 2rem 0;
+}
+
+.no-results-message h3,
+.no-posts-message h3,
+.error-message h3 {
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.no-results-message p,
+.no-posts-message p,
+.error-message p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+.error-detail {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-family: monospace;
+}
+
+.clear-search-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.clear-search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.search-submit svg {
+    width: 18px;
+    height: 18px;
+    fill: #ffffff;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .floating-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+    }
+    
+    .floating-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+    
+    .blog-header h1 {
+        font-size: 2rem;
+    }
+    
+    .blog-posts {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .search-container {
+        right: 80px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+
+/* ========================================
+   移动端文章列表控制按钮
+   ======================================== */
+
+/* 移动端展开按钮 - 半圆形，位于左边框中等偏下位置 */
+.mobile-expand-btn {
+    display: none; /* 默认隐藏，只在移动端显示 */
+    position: fixed;
+    left: 0;
+    top: 60%; /* 中等偏下位置 */
+    width: 40px;
+    height: 60px;
+    background: rgba(0, 0, 0, 0.7);
+    /* 添加webkit前缀以提高Chrome移动端兼容性 */
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: none;
+    border-radius: 0 30px 30px 0; /* 右侧半圆形 */
+    color: #ffffff;
+    cursor: pointer;
+    z-index: 1001;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+    outline: none;
+}
+
+.mobile-expand-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+    -webkit-transform: translateX(2px);
+    transform: translateX(2px);
+}
+
+.mobile-expand-btn svg {
+    width: 20px;
+    height: 20px;
+    margin-left: 4px; /* 稍微向右偏移 */
+}
+
+/* 移动端收起按钮 - 位于搜索框左侧 */
+.mobile-collapse-btn {
+    display: none; /* 默认隐藏，只在移动端显示 */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    color: #ffffff;
+    cursor: pointer;
+    margin-right: 8px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    outline: none;
+    flex-shrink: 0;
+}
+
+.mobile-collapse-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.mobile-collapse-btn svg {
+    width: 18px;
+    height: 18px;
+}
+
+/* 移动端媒体查询 */
+@media screen and (max-width: 768px) {
+    /* 默认隐藏展开按钮 */
+    .mobile-expand-btn {
+        display: none !important;
+    }
+    
+    /* 只在第一页且页面激活时显示展开按钮 */
+    body.page-1-active #page-1.visible .mobile-expand-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* 显示移动端收起按钮 - 只在第一页显示 */
+    #page-1.visible .mobile-collapse-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+    
+    /* 确保在第二页时完全隐藏展开按钮 */
+    #page-2.visible .mobile-expand-btn,
+    body:not(.page-1-active) .mobile-expand-btn {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    /* 调整文章列表容器在移动端的样式 - 使用更高优先级的选择器 */
+    #page-1.visible .article-list-container {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: none;
+        bottom: 10px;
+        max-height: 70vh; /* 限制最大高度，避免占据过多空间 */
+        -webkit-transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
+        transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
+        opacity: 0 !important;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+    
+    /* 展开状态的文章列表 - 使用更高优先级的选择器 */
+    #page-1.visible .article-list-container.expanded {
+        -webkit-transform: translateX(0) !important;
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+    
+    /* 隐藏展开按钮当文章列表展开时 */
+    #page-1.visible .article-list-container.expanded ~ .mobile-expand-btn {
+        opacity: 0;
+        pointer-events: none;
+    }
+    
+    /* 调整搜索头部布局 */
+    .search-header {
+        padding: 10px;
+    }
+    
+    /* 调整搜索输入框 */
+    .search-input {
+        font-size: 16px; /* 防止iOS缩放 */
+    }
+    
+    /* 调整文章列表滚动 */
+    .article-list {
+        max-height: calc(70vh - 60px); /* 减去搜索头部高度 */
+        overflow-y: auto;
+    }
+}
+
+/* ========================================
+   歌词显示样式
+   ======================================== */
+
+/* 星星闪烁效果 */
+.stars-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%; /* 只覆盖上半部分 */
+    pointer-events: none;
+    z-index: 2; /* 调整z-index，确保在背景之上但在歌词之下 */
+}
+
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    animation: twinkle var(--duration) infinite;
+}
+
+/* 星星闪烁动画 */
+@keyframes twinkle {
+    0%, 100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* 桌面端显示类 */
+.desktop-only {
+    display: block;
+}
+
+/* 移动端显示类 */
+.mobile-only {
+    display: none;
+}
+
+/* 统一歌词显示容器（桌面端和移动端共用） */
+.mobile-lyrics-container {
+    display: block; /* 桌面端和移动端都显示 */
+    position: absolute;
+    top: calc(70% - 100px); /* 上移100像素 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: auto; /* 改为自动高度，适应三行显示 */
+    z-index: 5; /* 确保在所有背景层之上 */
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* 桌面端样式优化 */
+@media screen and (min-width: 769px) {
+    .mobile-lyrics-container {
+        width: 80%; /* 桌面端稍微窄一些 */
+        top: calc(65% - 100px); /* 桌面端位置上移100像素 */
+    }
+}
+
+.mobile-lyrics-content {
+    width: 100%;
+    height: auto; /* 改为自动高度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    /* 移除滚动相关样式，因为现在只显示三行 */
+}
+
+.mobile-lyrics-content::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+.mobile-lyric-line {
+    color: white;
+    text-align: center;
+    font-size: 16px; /* 稍微增大字体 */
+    line-height: 1.8;
+    margin: 8px 0; /* 增加行间距 */
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    word-wrap: break-word;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+    /* 为动画过渡做准备 */
+    transform: translateY(0);
+    will-change: transform, opacity;
+}
+
+/* 歌词过渡动画状态 */
+.mobile-lyric-line.lyric-transitioning {
+    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+                       opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+               opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 确保动画期间不受其他动画影响 */
+    will-change: transform, opacity;
+    isolation: isolate; /* 创建新的层叠上下文 */
+}
+
+/* 桌面端歌词行样式优化 */
+@media screen and (min-width: 769px) {
+    .mobile-lyric-line {
+        font-size: 18px; /* 桌面端字体稍大 */
+        line-height: 2.0; /* 桌面端行高稍大 */
+        margin: 10px 0;
+    }
+    
+    .mobile-lyric-line.mobile-current {
+        font-size: 22px; /* 桌面端当前歌词更大 */
+        margin: 15px 0;
+    }
+    
+    .mobile-lyric-line.mobile-next {
+        font-size: 17px; /* 桌面端下一句字体 */
+    }
+}
+
+.mobile-lyric-line.mobile-current {
+    opacity: 1;
+    font-size: 18px;
+    font-weight: 600;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    margin: 12px 0;
+    white-space: normal;
+    text-overflow: unset;
+}
+
+.mobile-lyric-line.mobile-next {
+    opacity: 0.7;
+    font-size: 15px;
+    color: #cccccc;
+}
+
+/* 移动端样式 */
+@media screen and (max-width: 768px) {
+    .desktop-only {
+        display: none;
+    }
+    
+    .mobile-only {
+        display: block;
+    }
+    
+    /* 移动端歌词容器样式保持不变 */
+    .mobile-lyrics-container {
+        width: 90%;
+        top: calc(70% - 100px); /* 移动端也上移100像素 */
+    }
+}
+
+/* 超小屏幕适配 */
+@media screen and (max-width: 480px) {
+    .mobile-expand-btn {
+        width: 35px;
+        height: 50px;
+        top: 55%;
+    }
+    
+    .mobile-expand-btn svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .article-list-container {
+        max-height: 60vh;
+    }
+}
+
+
+    
+    .article-list {
+        max-height: calc(60vh - 60px);
+    }
 
