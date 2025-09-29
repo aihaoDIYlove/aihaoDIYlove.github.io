@@ -117,21 +117,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // 配置社交媒体链接 - 自动设置链接地址和安全属性
-    const githubLink = document.querySelector('.social-link.github');
+    const githubLink = document.querySelector('#github-link');
     if (githubLink) {
         githubLink.href = socialLinks.github;
         githubLink.target = '_blank'; // 新窗口打开
         githubLink.rel = 'noopener noreferrer'; // 安全属性
     }
 
-    const bilibiliLink = document.querySelector('.social-link.bilibili');
+    const bilibiliLink = document.querySelector('#bilibili-link');
     if (bilibiliLink) {
         bilibiliLink.href = socialLinks.bilibili;
         bilibiliLink.target = '_blank'; // 新窗口打开
         bilibiliLink.rel = 'noopener noreferrer'; // 安全属性
     }
 
-    const zhihuLink = document.querySelector('.social-link.zhihu');
+    const zhihuLink = document.querySelector('#zhihu-link');
     if (zhihuLink) {
         zhihuLink.href = socialLinks.zhihu;
         zhihuLink.target = '_blank'; // 新窗口打开
