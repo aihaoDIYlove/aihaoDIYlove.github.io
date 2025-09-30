@@ -261,26 +261,13 @@ html, body {
    ======================================== */
 #page-2 {
     /* 背景图片路径 - 音乐页面背景 */
-    background-image: url('/background-page-2.png') !important;
+    background-image: url('/background-page-2.webp') !important;
     /* 背景尺寸 - cover确保图片覆盖整个区域 */
     background-size: cover !important;
     /* 背景位置 - 居中显示 */
     background-position: center !important;
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
-}
-
-/* ========================================
-   第三页背景设置 (音乐页面)
-   ======================================== */
-#page-3 {
-    /* 背景图片路径 - 原第二页背景 */
-    background-image: url('/background-page-2.png') !important;
-    /* 背景尺寸 - cover确保图片覆盖整个区域 */
-    background-size: cover !important;
-    /* 背景位置 - 居中显示 */
-    background-position: center !important;
-    background-repeat: no-repeat !important;
 }
 
 .container {
@@ -698,8 +685,8 @@ html, body {
 #aplayer .aplayer-info {
     /* 信息区域背景 - 半透明白色 rgba(255, 255, 255, 0.1) */
     background: rgba(255, 255, 255, 0.1) !important;
-    /* 信息区域圆角 - 6px */
-    border-radius: 6px !important;
+    /* 信息区域圆角 - 15px */
+    border-radius: 15px !important;
 }
 
 /* 播放器控制区域 - 设为纯透明但保持功能 */
@@ -707,7 +694,7 @@ html, body {
     /* 控制区域背景 - 完全透明 */
     background: transparent !important;
     /* 移除圆角 */
-    border-radius: 0 !important;
+    /*border-radius: 0 !important;*/
 }
 
 /* 进度条容器 */
@@ -803,7 +790,7 @@ html, body {
         width: 100%;
         height: 100%;
         /* 背景图片路径 - 与桌面端相同 */
-        background-image: url('/background-page-2.png');
+        background-image: url('/background-page-2.webp');
         background-position: center;
         background-repeat: no-repeat;
     }

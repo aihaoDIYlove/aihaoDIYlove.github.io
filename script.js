@@ -78,7 +78,7 @@ class TypewriterAnimation {
    ======================================== */
 // 初始化歌词显示功能
 function initLyricsDisplay() {
-    console.log('🎵 初始化歌词显示功能');
+    console.log('初始化歌词显示功能');
     
     // 创建歌词显示实例
     lyricsDisplay = new LyricsDisplay();
@@ -89,7 +89,7 @@ function initLyricsDisplay() {
     // 初始时隐藏歌词容器
     lyricsDisplay.setVisible(false);
     
-    console.log('✅ 歌词显示功能初始化完成');
+    console.log('歌词显示功能初始化完成');
 }
 
 /* ========================================
@@ -97,9 +97,9 @@ function initLyricsDisplay() {
    ======================================== */
 // 社交媒体链接配置 - 可修改这些链接为您自己的社交媒体账号
 const socialLinks = {
-    github: 'https://github.com/aihaoDIYlove', // GitHub链接 - 请替换为您的GitHub链接
-    bilibili: 'https://space.bilibili.com/62784664', // Bilibili链接 - 请替换为您的Bilibili链接
-    zhihu: 'https://www.zhihu.com/people/ai-hao-diylove' // 知乎链接 - 请替换为您的知乎链接
+    github: 'https://github.com/aihaoDIYlove', // GitHub链接
+    bilibili: 'https://space.bilibili.com/62784664', // Bilibili链接
+    zhihu: 'https://www.zhihu.com/people/ai-hao-diylove' // 知乎链接
 };
 
 /* ========================================
@@ -107,7 +107,7 @@ const socialLinks = {
    ======================================== */
 // 页面加载完成后执行的初始化函数
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 页面加载完成，开始初始化');
+    console.log('页面加载完成，开始初始化');
     
     // 初始化打字机动画效果
     const typewriterElement = document.querySelector('#typewriter-text');
@@ -138,14 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
         zhihuLink.rel = 'noopener noreferrer'; // 安全属性
     }
 
-    // 初始化页面导航功能
-    initPageNavigation();
-    
     // 初始化文章列表
     initArticleList();
     
-    // 删除了博客功能、搜索功能和页面滚动监听
-
     // 页面加载动画效果 - 淡入效果
     document.body.style.opacity = '0'; // 初始透明
     setTimeout(() => {
@@ -192,7 +187,7 @@ class LRCParser {
         
         // 按时间排序
         this.lyrics.sort((a, b) => a.time - b.time);
-        console.log('🎵 歌词解析完成，共', this.lyrics.length, '行');
+        console.log('歌词解析完成，共', this.lyrics.length, '行');
     }
 
     // 根据当前播放时间获取当前歌词索引
@@ -241,7 +236,7 @@ class LyricsDisplay {
     // 加载歌词文件
     async loadLyrics(lrcUrl) {
         try {
-            console.log('🎵 开始加载歌词文件:', lrcUrl);
+            console.log('开始加载歌词文件:', lrcUrl);
             const response = await fetch(lrcUrl);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -249,9 +244,9 @@ class LyricsDisplay {
             const lrcContent = await response.text();
             this.parser.parse(lrcContent);
             this.renderLyrics();
-            console.log('✅ 歌词加载成功');
+            console.log('歌词加载成功');
         } catch (error) {
-            console.error('❌ 歌词加载失败:', error);
+            console.error('歌词加载失败:', error);
             this.showError('歌词加载失败');
         }
     }
@@ -482,26 +477,26 @@ let lyricsDisplay = null;
    ======================================== */
 // 初始化音乐播放器 - 修复版本，确保播放器正常工作
 function initMusicPlayer() {
-    console.log('🎵 开始初始化音乐播放器');
+    console.log('开始初始化音乐播放器');
     
     // 延迟初始化确保DOM完全加载 - 1000毫秒延迟
     setTimeout(() => {
-        console.log('🔍 检查APlayer库和容器');
+        console.log('检查APlayer库和容器');
         
         // 检查APlayer库是否已加载
         if (typeof APlayer === 'undefined') {
-            console.error('❌ APlayer库未加载');
+            console.error('APlayer库未加载');
             return;
         }
         
         // 检查播放器容器是否存在
         const container = document.getElementById('aplayer');
         if (!container) {
-            console.error('❌ 未找到播放器容器');
+            console.error('未找到播放器容器');
             return;
         }
         
-        console.log('✅ APlayer库和容器都已准备就绪');
+        console.log('APlayer库和容器都已准备就绪');
         
         try {
             // 强制显示容器，确保Chrome能正确渲染
@@ -527,11 +522,11 @@ function initMusicPlayer() {
                 container: container, // 播放器容器
                 mini: false, // 是否为迷你模式 - false为完整模式
                 autoplay: false, // 改为false，避免Chrome阻止自动播放
-                theme: '#ffffff', // 主题颜色 - 浅蓝色，可修改为其他颜色
+                theme: 'rgba(255, 255, 255, 0.0)', // 主题颜色 - 浅蓝色，可修改为其他颜色
                 loop: 'one', // 循环模式 - 'all'全部循环, 'one'单曲循环, 'none'不循环
                 order: 'list', // 播放顺序 - 'list'列表顺序, 'random'随机播放
                 preload: 'auto', // 预加载 - 'auto'自动, 'metadata'仅元数据, 'none'不预加载
-                volume: 0.05, // 默认音量 - 0.0到1.0之间，0.1为10%音量
+                volume: 0.2, // 默认音量 - 0.0到1.0之间，0.1为10%音量
                 mutex: true, // 互斥播放 - true表示只允许一个播放器播放
                 listFolded: false, // 播放列表是否折叠 - false为展开状态
                 listMaxHeight: 90, // 播放列表最大高度（像素）- 可调整列表显示高度
@@ -549,22 +544,22 @@ function initMusicPlayer() {
             // 强制触发重绘
             container.offsetHeight;
             
-            console.log('🎉 APlayer初始化成功！');
+            console.log('APlayer初始化成功！');
             
             // 初始化歌词显示功能
             initLyricsDisplay();
             
             // 播放器事件监听 - 用于调试和状态跟踪
             window.aplayer.on('loadstart', () => {
-                console.log('🎵 开始加载音频');
+                console.log('开始加载音频');
             });
             
             window.aplayer.on('canplay', () => {
-                console.log('✅ 音频可以播放');
+                console.log('音频可以播放');
             });
             
             window.aplayer.on('error', (error) => {
-                console.error('❌ 播放器错误:', error);
+                console.error('播放器错误:', error);
             });
 
             // 添加播放时间更新监听，用于歌词同步
@@ -578,7 +573,7 @@ function initMusicPlayer() {
             setupScrollListener();
             
         } catch (error) {
-            console.error('❌ APlayer初始化失败:', error);
+            console.error('APlayer初始化失败:', error);
         }
     }, 1000); // 延迟1秒确保所有资源加载完成
 }
@@ -597,12 +592,12 @@ function setupScrollListener() {
                 
                 // 当第一页进入视口时（用户在第一页）
                 if (entry.isIntersecting) {
-                    console.log('📍 用户在第一页');
+                    console.log('用户在第一页');
                     // 添加visible类来显示文章列表
                     page1.classList.add('visible');
                 } else {
                     // 当第一页离开视口时（用户离开第一页）
-                    console.log('📍 用户离开第一页');
+                    console.log('已离开第一页');
                     // 移除visible类来隐藏文章列表
                     page1.classList.remove('visible');
                     
@@ -623,7 +618,7 @@ function setupScrollListener() {
                 
                 // 当第二页进入视口时（用户滚动到第二页）
                 if (entry.isIntersecting) {
-                    console.log('📍 用户滚动到第二页');
+                    console.log('用户滚动到第二页');
                     // 添加visible类来显示播放器 - 配合CSS控制显示/隐藏
                     page2.classList.add('visible');
                     
@@ -639,13 +634,13 @@ function setupScrollListener() {
                         // 检查播放Promise是否存在且有catch方法（避免TypeError）
                         if (playPromise && typeof playPromise.catch === 'function') {
                             playPromise.catch(e => {
-                                console.log('🔇 自动播放被浏览器阻止，需要用户交互');
+                                console.log('自动播放被阻止，需用户交互');
                             });
                         }
                     }
                 } else {
                     // 当第二页离开视口时（用户离开第二页）
-                    console.log('📍 用户离开第二页');
+                    console.log('用户离开第二页');
                     // 移除visible类来隐藏播放器
                     page2.classList.remove('visible');
                     
@@ -681,20 +676,6 @@ function setupScrollListener() {
     }
 }
 
-/* ========================================
-   页面导航功能
-   ======================================== */
-function initPageNavigation() {
-    // 博客跳转按钮已删除，此函数暂时保留为空
-}
-
-/* ========================================
-   博客文章动态加载功能
-   ======================================== */
-
-/* ========================================
-   文章列表功能（已移除博客页面，改为简单列表）
-   ======================================== */
 
 // 文章数据存储
 let articlesData = [];
@@ -712,9 +693,9 @@ async function initArticleList() {
         // 初始化搜索功能
         initArticleSearch();
         
-        console.log('📚 文章列表初始化完成');
+        console.log('文章列表初始化完成');
     } catch (error) {
-        console.error('❌ 加载文章数据失败:', error);
+        console.error('加载文章数据失败:', error);
         // 显示错误信息
         const articleList = document.querySelector('.article-list');
         if (articleList) {
@@ -828,8 +809,8 @@ function initMobileArticleListControl() {
         event.preventDefault();
         event.stopPropagation();
         
-        console.log('🔍 展开按钮被点击');
-        console.log('🔍 当前文章列表状态:', articleListContainer.classList.contains('expanded'));
+        console.log('展开按钮被点击');
+        console.log('当前文章列表状态:', articleListContainer.classList.contains('expanded'));
         
         // 强制触发重排以确保Chrome正确渲染
         articleListContainer.offsetHeight;
@@ -838,7 +819,7 @@ function initMobileArticleListControl() {
         articleListContainer.classList.add('expanded');
         
         // 验证类是否添加成功
-        console.log('🔍 添加expanded类后:', articleListContainer.classList.contains('expanded'));
+        console.log('添加expanded类后:', articleListContainer.classList.contains('expanded'));
         
         // 强制重绘
         articleListContainer.style.transform = 'translateX(0)';
@@ -857,7 +838,7 @@ function initMobileArticleListControl() {
         event.preventDefault();
         event.stopPropagation();
         
-        console.log('🔍 展开按钮触摸开始');
+        console.log('展开按钮触摸开始');
         
         // 强制触发重排
         articleListContainer.offsetHeight;
@@ -961,7 +942,7 @@ function initStarsEffect() {
     if (!starsContainer) return;
     
     // 星星配置
-    const starCount = 15; // 星星数量，不要太多
+    const starCount = 16; // 星星数量，不要太多
     const minSize = 1; // 最小尺寸（像素）
     const maxSize = 4; // 最大尺寸（像素）
     const minDuration = 2; // 最小闪烁周期（秒）
