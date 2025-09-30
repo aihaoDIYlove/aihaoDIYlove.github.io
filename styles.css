@@ -7,8 +7,8 @@ select,
 summary,
 textarea,
 [tabindex] {
-    touch-action: manipulation;
     -ms-touch-action: manipulation;
+    touch-action: manipulation;
 }
 
 .screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
@@ -509,48 +509,48 @@ html, body {
     /* 移动端标题区域调整 */
     .header {
         /* 移动端顶部距离 - 20px */
-        top: 20px;
+        top: 1.25rem;
         /* 移动端左侧距离 - 20px */
-        left: 20px;
+        left: 1.25rem;
     }
     
     /* 移动端社交媒体导航调整 */
     .social-nav {
-        /* 移动端顶部距离 - 20px */
-        top: 20px;
-        /* 移动端右侧距离 - 20px */
-        right: 20px;
-        /* 移动端图标间距 - 15px */
-        gap: 15px;
+        /* 移动端顶部距离 - 相当于20px，基于根元素字体大小 */
+        top: 1.25rem;
+        /* 移动端右侧距离 - 相当于20px，基于根元素字体大小 */
+        right: 1.25rem;
+        /* 移动端图标间距 - 相当于15px，基于根元素字体大小 */
+        gap: 0.9375rem;
     }
     
     /* 移动端社交媒体链接尺寸调整 */
     .social-link {
-        /* 移动端图标容器尺寸 - 40x40px */
-        width: 40px;
-        height: 40px;
+        /* 移动端图标容器尺寸 - 相当于40px，基于根元素字体大小 */
+        width: 2.5rem;
+        height: 2.5rem;
     }
     
     /* 移动端社交媒体图标尺寸调整 */
     .social-icon {
-        /* 移动端图标尺寸 - 20x20px */
-        width: 20px;
-        height: 20px;
+        /* 移动端图标尺寸 - 相当于20px，基于根元素字体大小 */
+        width: 1.25rem;
+        height: 1.25rem;
     }
     
     /* 移动端对话框调整 */
     .dialog-box {
-        /* 移动端对话框最小宽度 - 160px */
-        min-width: 160px;
-        /* 移动端对话框内边距 - 上下10px 左右16px */
-        padding: 10px 16px;
+        /* 移动端对话框最小宽度 - 10rem，基于根元素字体大小 */
+        min-width: 10rem;
+        /* 移动端对话框内边距 - 上下0.625rem 左右1rem */
+        padding: 0.625rem 1rem;
         margin-top: 0;
     }
     
     /* 移动端打字机文本和光标字体调整 */
     #typewriter-text, .cursor {
-        /* 移动端字体大小 - 16px */
-        font-size: 16px;
+        /* 移动端字体大小 - 相当于16px，基于根元素字体大小 */
+        font-size: 1rem;
     }
     
     /* 移动端主标题字体调整 */
@@ -573,33 +573,33 @@ html, body {
 .music-player {
     /* 固定定位 - 左下角 */
     position: fixed !important;
-    /* 距离底部距离 - 12px，可调整 */
-    bottom: 12px !important;
-    /* 距离左侧距离 - 12px，可调整 */
-    left: 12px !important;
-    /* 播放器宽度 - 180px，可调整 */
-    width: 180px !important;
+    /* 距离底部距离 - 0.75rem，可调整 */
+    bottom: 0.75rem !important;
+    /* 距离左侧距离 - 0.75rem，可调整 */
+    left: 0.75rem !important;
+    /* 播放器宽度 - 11.25rem，可调整 */
+    width: 11.25rem !important;
     z-index: 1000 !important;
     /* 背景颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
     background: rgba(255, 255, 255, 0.1) !important;
-    /* 圆角大小 - 12px */
-    border-radius: 12px !important;
+    /* 圆角大小 - 0.75rem */
+    border-radius: 0.75rem !important;
     /* 阴影效果 - 黑色15%透明度 */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    /* 毛玻璃效果 - 15px模糊 - 添加webkit前缀 */
-    -webkit-backdrop-filter: blur(15px) !important;
-    backdrop-filter: blur(15px) !important;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15) !important;
+    /* 毛玻璃效果 - 0.9375rem模糊 - 添加webkit前缀 */
+    -webkit-backdrop-filter: blur(0.9375rem) !important;
+    backdrop-filter: blur(0.9375rem) !important;
     /* 边框 - 1px半透明白色 */
-    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
     /* 默认隐藏 */
     display: none !important;
     visibility: hidden !important;
     opacity: 0 !important;
-    /* 最小高度 - 60px */
-    min-height: 60px !important;
+    /* 最小高度 - 3.75rem */
+    min-height: 3.75rem !important;
     /* 平滑过渡效果 - 0.3秒缓入缓出 */
-    -webkit-transform: translateY(20px) !important;
-    transform: translateY(20px) !important;
+    -webkit-transform: translateY(2.5rem) !important;
+    transform: translateY(2.5rem) !important;
     -webkit-transition: all 0.3s ease-in-out !important;
     transition: all 0.3s ease-in-out !important;
     /* Chrome移动端兼容性 - 强制显示 */
@@ -684,7 +684,7 @@ html, body {
 /* 播放器信息区域 */
 #aplayer .aplayer-info {
     /* 信息区域背景 - 半透明白色 rgba(255, 255, 255, 0.1) */
-    background: rgba(255, 255, 255, 0.1) !important;
+    background: rgba(255, 255, 255, 0) !important;
     /* 信息区域圆角 - 15px */
     border-radius: 15px !important;
 }
@@ -705,22 +705,22 @@ html, body {
     border-radius: 3px !important;
 }
 
-/* 缓冲进度条 - 恢复显示 */
+/* 缓冲进度条 - 显示 */
 #aplayer .aplayer-loaded {
-    /* 缓冲进度条颜色 - 半透明白色 rgba(255, 255, 255, 0.3) */
-    background: rgba(255, 255, 255, 0.3) !important;
+    /* 缓冲进度条颜色 - 半透明白色 */
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 已播放进度条 */
 #aplayer .aplayer-played {
-    /* 已播放颜色 - 半透明白色 rgba(255, 255, 255, 0.8) */
-    background: rgba(255, 255, 255, 0.8) !important;
+    /* 已播放颜色 - 半透明白色 */
+    background: rgba(255, 255, 255, 0.7) !important;
 }
 
 /* 音量条容器 */
 #aplayer .aplayer-volume-bar {
     /* 音量条背景 - 半透明白色 rgba(255, 255, 255, 0.2) */
-    background: rgba(255, 255, 255, 0.2) !important;
+    background: rgba(255, 255, 255, 0.1) !important;
 }
 
 /* 音量条 */
@@ -742,38 +742,23 @@ html, body {
 @media (min-width: 769px) {
     .music-player, #aplayer {
         /* 桌面端播放器宽度 - 250px */
-        width: 250px !important;
+        width: 15.625rem !important;
         /* 桌面端底部距离 - 20px */
-        bottom: 10px !important;
+        bottom: 0.625rem !important;
         /* 桌面端左侧距离 - 20px */
-        left: 10px !important;
+        left: 0.625rem !important;
     }
 }
 
 /* 移动端音乐播放器调整 */
 @media (max-width: 768px) {
-    .music-player, #aplayer {
-        /* 移动端播放器宽度 - 240px（调小了40px） */
-        width: 240px !important;
-        /* 移动端底部距离 - 15px */
-        bottom: 15px !important;
-        /* 移动端左侧距离 - 15px */
-        left: 15px !important;
-    }
-}
-
-/* ========================================
-   小屏幕移动端特殊处理
-   ======================================== */
-/* 小屏幕移动端音乐播放器调整 */
-@media (max-width: 480px) {
     .music-player {
-        /* 小屏幕播放器宽度 - 自适应减去40px边距 */
-        width: calc(100% - 40px);
-        /* 小屏幕左侧距离 - 20px */
-        left: 20px;
-        /* 小屏幕底部距离 - 20px */
-        bottom: 20px;
+        /* 小屏幕播放器宽度 - 自适应减去2rem边距 */
+        width: calc(100% - 2rem);
+        /* 小屏幕左侧距离 - 0.9375rem */
+        left: 0.9375rem;
+        /* 小屏幕底部距离 - 0.9375rem */
+        bottom: 0.9375rem;
     }
 
     /* 小屏幕第二页背景处理 */
@@ -800,15 +785,15 @@ html, body {
         top: 0;
         /* 背景尺寸 - cover裁剪填充 */
         background-size: cover;
-        /* 模糊效果 - 20px模糊 */
-        filter: blur(20px);
+        /* 模糊效果 - 1rem模糊 */
+        filter: blur(1rem);
         z-index: 1;
     }
 
     /* 顶层：居中并按宽度缩放背景 */
     #page-2::after {
         top: 50%;
-        transform: translateY(calc(-50% - 120px));
+        transform: translateY(calc(-50% - 7.5rem));
         /* 背景尺寸 - contain按宽度缩放保持比例 */
         background-size: contain;
         z-index: 2;
@@ -823,7 +808,7 @@ html, body {
     /* 确保音乐播放器在背景层之上 */
     #page-2 .music-player, #page-2 #aplayer {
         position: fixed !important;
-        z-index: 1000 !important;
+        z-index: 4 !important;
     }
 }
 
@@ -882,18 +867,14 @@ html, body {
     display: none;
 }
 
-/* 主页专用博客按钮 - 使用JavaScript控制显示 */
+/* 主页专用博客按钮 */
 .blog-btn.main-only {
     display: none;
 }
 
 /* ========================================
-   第三页 - 博客页面样式
+   博客页面样式
    ======================================== */
-#page-3 {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-    padding: 40px 20px;
-}
 
 .blog-container {
     max-width: 1200px;
@@ -1188,10 +1169,10 @@ html, body {
     display: none; /* 默认隐藏，只在移动端显示 */
     position: fixed;
     left: 0;
-    top: 60%; /* 中等偏下位置 */
+    top: 30%; /* 中等偏下位置 */
     width: 40px;
-    height: 60px;
-    background: rgba(0, 0, 0, 0.7);
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
     /* 添加webkit前缀以提高Chrome移动端兼容性 */
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -1208,7 +1189,7 @@ html, body {
 }
 
 .mobile-expand-btn:hover {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.1);
     -webkit-transform: translateX(2px);
     transform: translateX(2px);
 }
@@ -1270,9 +1251,8 @@ html, body {
         visibility: visible !important;
     }
     
-    /* 确保在第二页时完全隐藏展开按钮 */
-    #page-2.visible .mobile-expand-btn,
-    body:not(.page-1-active) .mobile-expand-btn {
+    /* 确保在第二页时隐藏展开按钮 */
+    #page-2.visible .mobile-expand-btn {
         display: none !important;
         opacity: 0 !important;
         visibility: hidden !important;
@@ -1289,7 +1269,7 @@ html, body {
         -webkit-transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
         transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
         opacity: 0 !important;
-        -webkit-transition: all 0.3s ease;
+        -webkit-transition: all 0.2s ease;
         transition: all 0.3s ease;
     }
     
@@ -1399,7 +1379,6 @@ html, body {
     justify-content: center;
     padding: 0 20px;
     box-sizing: border-box;
-    /* 移除滚动相关样式，因为现在只显示三行 */
 }
 
 .mobile-lyrics-content::-webkit-scrollbar {
@@ -1491,17 +1470,17 @@ html, body {
     }
 }
 
-/* 超小屏幕适配 */
-@media screen and (max-width: 480px) {
+/* 移动端适配 */
+@media screen and (max-width: 768px) {
     .mobile-expand-btn {
-        width: 35px;
-        height: 50px;
+        width: 2.1875rem;
+        height: 3.125rem;
         top: 55%;
     }
     
     .mobile-expand-btn svg {
-        width: 18px;
-        height: 18px;
+        width: 1.125rem;
+        height: 1.125rem;
     }
     
     .article-list-container {
@@ -1509,9 +1488,7 @@ html, body {
     }
 }
 
-
-    
     .article-list {
-        max-height: calc(60vh - 60px);
+        max-height: calc(60vh - 3.75rem);
     }
 

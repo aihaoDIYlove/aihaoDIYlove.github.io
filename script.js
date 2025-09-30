@@ -942,11 +942,11 @@ function initStarsEffect() {
     if (!starsContainer) return;
     
     // 星星配置
-    const starCount = 16; // 星星数量，不要太多
+    const starCount = 64; // 星星数量
     const minSize = 1; // 最小尺寸（像素）
     const maxSize = 4; // 最大尺寸（像素）
-    const minDuration = 2; // 最小闪烁周期（秒）
-    const maxDuration = 5; // 最大闪烁周期（秒）
+    const minDuration = 1.6; // 最小闪烁周期（秒）
+    const maxDuration = 4; // 最大闪烁周期（秒）
     
     // 生成随机星星
     for (let i = 0; i < starCount; i++) {
