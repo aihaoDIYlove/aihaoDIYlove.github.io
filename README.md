@@ -3,15 +3,20 @@
 ### 文件结构
 
 ```
-public/
-├── index.html          # 主页面
-├── styles.css          # 样式文件
-├── script.js           # 主要JavaScript功能
-├── data/
-│   └── blog-posts.json # 博客文章数据
-├── articles/           # Markdown文章文件
-├── lyrics/             # 歌词文件
-└── 其他静态资源...
+public\
+├── articles\                       # 博客文章目录
+├── data\                           # 数据文件目录
+│   └── blog-posts.json             # 博客文章索引
+├── lyrics\                         # 歌词文件目录 音乐歌词文件 (LRC格式)
+├── CNAME                           # GitHub Pages 自定义域名配置文件
+├── README.md                       # 项目说明文档
+├── article.html                    # 文章详情页面模板
+├── background-page-2.webp          # 第二页背景图片
+├── background.png                  # 主背景图片
+├── favicon.ico                     # 网站图标
+├── index.html                      # 主页面文件
+├── script.js                       # 主要JavaScript功能文件
+└── styles.css                      # 主要样式文件
 ```
 
 ## 博客功能
@@ -26,4 +31,5 @@ public/
 ## 顶部悬浮
 - **打字机动画**
 - **社交网站导航**
+
 
