@@ -217,7 +217,7 @@ class LRCParser {
 // 歌词显示管理器
 class LyricsDisplay {
     constructor() {
-        // 只使用移动端歌词容器，统一桌面端和移动端
+        // 歌词容器
         this.mobileContainer = document.querySelector('.mobile-lyrics-container');
         this.mobileContent = document.querySelector('.mobile-lyrics-content');
         this.parser = new LRCParser();
@@ -225,7 +225,7 @@ class LyricsDisplay {
         this.isVisible = false;
         this.isMobile = window.innerWidth <= 768;
         
-        // 缓存移动端歌词元素，避免频繁DOM查询
+        // 缓存歌词元素，避免频繁DOM查询
         this.mobileLyricElements = [];
         this.currentMobileLine = null;
         this.nextMobileLine = null;
@@ -253,7 +253,7 @@ class LyricsDisplay {
 
     // 渲染歌词到页面
     renderLyrics() {
-        // 统一使用移动端歌词容器，显示三行
+        // 显示三行
         if (this.mobileContent) {
             this.mobileContent.innerHTML = '';
             this.mobileLyricElements = []; // 重置缓存数组
@@ -522,7 +522,7 @@ function initMusicPlayer() {
                 container: container, // 播放器容器
                 mini: false, // 是否为迷你模式 - false为完整模式
                 autoplay: false, // 改为false，避免Chrome阻止自动播放
-                theme: 'rgba(255, 255, 255, 0.0)', // 主题颜色 - 浅蓝色，可修改为其他颜色
+                theme: 'rgba(255, 255, 255, 0.0)', // 主题颜色 - 可修改为其他颜色
                 loop: 'one', // 循环模式 - 'all'全部循环, 'one'单曲循环, 'none'不循环
                 order: 'list', // 播放顺序 - 'list'列表顺序, 'random'随机播放
                 preload: 'auto', // 预加载 - 'auto'自动, 'metadata'仅元数据, 'none'不预加载
@@ -537,7 +537,7 @@ function initMusicPlayer() {
                     url: 'https://music.163.com/song/media/outer/url?id=419373910.mp3', // 音频文件URL - 可替换为其他音频链接
                     cover: 'https://www.gequhai.com/static/img/logo.png', // 封面图片URL - 可替换为其他图片链接
                     // 歌词配置 - LRC格式，可修改或添加实际歌词
-                    lrc: '[00:00.00] 作词 : 花粥\n[00:01.00] 作曲 : 花粥\n[00:02.00] 编曲 : 花粥\n[00:03.00] 制作人 : 花粥\n[00:04.00] 吉他 : 花粥\n[00:05.00] 和声 : 花粥\n[00:06.00] 录音 : 花粥\n[00:07.00] 混音 : 花粥\n[00:08.00] 母带 : 花粥'
+                    lrc: '[00:00.00] 作词 : 花粥\n[00:01.00] 作曲 : 花粥\n[00:02.00] 编曲 : 花粥'
                 }]
             });
             
@@ -980,4 +980,5 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
     star.style.animationDelay = delay + 's';
     
     container.appendChild(star);
+
 }
