@@ -1,0 +1,50 @@
+{
+  "playlist": [
+    {
+      "name": "长岛",
+      "artist": "花粥",
+      "url": "https://music.163.com/song/media/outer/url?id=419373910.mp3",
+      "cover": "https://free.picui.cn/free/2025/10/09/68e758e15f6f9.png",
+      "lrcPath": "./lyrics/长岛-花粥-歌词.lrc"
+    },
+    {
+      "name": "只不过是",
+      "artist": "花粥", 
+      "url": "https://music.163.com/song/media/outer/url?id=419373705.mp3",
+      "cover": "https://free.picui.cn/free/2025/10/09/68e758e15f6f9.png",
+      "lrcPath": "./lyrics/只不过是-花粥-歌词.lrc"
+    },
+    {
+      "name": "遥不可及的你",
+      "artist": "花粥",
+      "url": "https://music.163.com/song/media/outer/url?id=450853439.mp3",
+      "cover": "https://free.picui.cn/free/2025/10/09/68e758e15f6f9.png",
+      "lrcPath": "./lyrics/遥不可及的你-花粥-歌词.lrc"
+    },
+    {
+      "name": "安眠咒",
+      "artist": "花粥",
+      "url": "https://music.163.com/song/media/outer/url?id=1382757155.mp3",
+      "cover": "https://free.picui.cn/free/2025/10/09/68e758e15f6f9.png",
+      "lrcPath": "./lyrics/安眠咒-花粥-歌词.lrc"
+    },
+    {
+      "name": "晴天和猫",
+      "artist": "花粥",
+      "url": "https://music.163.com/song/media/outer/url?id=1955651132.mp3",
+      "cover": "https://free.picui.cn/free/2025/10/09/68e758e15f6f9.png",
+      "lrcPath": "./lyrics/晴天和猫-花粥-歌词.lrc"
+    }
+  ],
+  "settings": {
+    "autoplay": false,
+    "loop": "all",
+    "order": "random",
+    "volume": 0.2,
+    "theme": "rgba(255, 255, 255, 0.0)",
+    "mini": false,
+    "listFolded": true,
+    "listMaxHeight": 90,
+    "preload": "none"
+  }
+}

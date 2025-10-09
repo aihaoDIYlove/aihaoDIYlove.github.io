@@ -79,12 +79,17 @@ class TypewriterAnimation {
 // 初始化歌词显示功能
 function initLyricsDisplay() {
     console.log('初始化歌词显示功能');
+    console.log('当前歌词路径:', currentLyricPath);
     
     // 创建歌词显示实例
     lyricsDisplay = new LyricsDisplay();
     
-    // 加载歌词文件
-    lyricsDisplay.loadLyrics('./lyrics/长岛-花粥-歌词.lrc');
+    // 只有在有明确歌词路径时才加载歌词
+    if (currentLyricPath) {
+        lyricsDisplay.loadLyrics(currentLyricPath);
+    } else {
+        console.log('等待歌词路径设置...');
+    }
     
     // 初始时隐藏歌词容器
     lyricsDisplay.setVisible(false);
@@ -217,7 +222,7 @@ class LRCParser {
 // 歌词显示管理器
 class LyricsDisplay {
     constructor() {
-        // 歌词容器
+        // 只使用移动端歌词容器，统一桌面端和移动端
         this.mobileContainer = document.querySelector('.mobile-lyrics-container');
         this.mobileContent = document.querySelector('.mobile-lyrics-content');
         this.parser = new LRCParser();
@@ -225,7 +230,7 @@ class LyricsDisplay {
         this.isVisible = false;
         this.isMobile = window.innerWidth <= 768;
         
-        // 缓存歌词元素，避免频繁DOM查询
+        // 缓存移动端歌词元素，避免频繁DOM查询
         this.mobileLyricElements = [];
         this.currentMobileLine = null;
         this.nextMobileLine = null;
@@ -253,7 +258,7 @@ class LyricsDisplay {
 
     // 渲染歌词到页面
     renderLyrics() {
-        // 显示三行
+        // 统一使用移动端歌词容器，显示三行
         if (this.mobileContent) {
             this.mobileContent.innerHTML = '';
             this.mobileLyricElements = []; // 重置缓存数组
@@ -462,7 +467,7 @@ class LyricsDisplay {
     // 显示/隐藏歌词容器
     setVisible(visible) {
         this.isVisible = visible;
-        // 统一使用移动端歌词容器（现在用于所有设备）
+        // 端歌词容器
         if (this.mobileContainer) {
             this.mobileContainer.style.display = visible ? 'block' : 'none';
         }
@@ -475,9 +480,51 @@ let lyricsDisplay = null;
 /* ========================================
    音乐播放器初始化和配置
    ======================================== */
-// 初始化音乐播放器 - 修复版本，确保播放器正常工作
-function initMusicPlayer() {
+// 全局变量存储音乐配置
+let musicConfig = null;
+let currentLyricPath = null;
+
+// 加载音乐配置文件
+async function loadMusicConfig() {
+    try {
+        const response = await fetch('./data/music-config.json');
+        if (!response.ok) {
+            throw new Error('无法加载音乐配置文件');
+        }
+        musicConfig = await response.json();
+        console.log('音乐配置加载成功:', musicConfig);
+        return musicConfig;
+    } catch (error) {
+        console.error('加载音乐配置失败:', error);
+        // 返回默认配置
+        return {
+            playlist: [{
+                name: '长岛',
+                artist: '花粥',
+                url: 'https://music.163.com/song/media/outer/url?id=419373910.mp3',
+                cover: 'https://www.gequhai.com/static/img/logo.png',
+                lrcPath: './lyrics/长岛-花粥-歌词.lrc'
+            }],
+            settings: {
+                autoplay: false,
+                loop: 'all',
+                order: 'random',
+                volume: 0.2,
+                theme: 'rgba(255, 255, 255, 0.0)',
+                mini: false,
+                listFolded: false,
+                listMaxHeight: 90
+            }
+        };
+    }
+}
+
+// 初始化音乐播放器 - 支持配置文件和随机播放
+async function initMusicPlayer() {
     console.log('开始初始化音乐播放器');
+    
+    // 先加载音乐配置
+    const config = await loadMusicConfig();
     
     // 延迟初始化确保DOM完全加载 - 1000毫秒延迟
     setTimeout(() => {
@@ -512,33 +559,42 @@ function initMusicPlayer() {
             container.offsetHeight;
             
             // 添加调试信息
-            console.log('🔧 容器样式已设置:', {
+            console.log('容器样式已设置:', {
                 display: container.style.display,
                 visibility: container.style.visibility,
                 opacity: container.style.opacity,
                 position: container.style.position
             });
+
+            // 转换配置文件格式为APlayer需要的格式
+            const audioList = config.playlist.map(song => ({
+                name: song.name,
+                artist: song.artist,
+                url: song.url,
+                cover: song.cover,
+                lrc: song.lrcPath // APlayer会自动加载LRC文件
+            }));
+
+            // 设置当前歌词路径（用于第一首歌）
+            if (config.playlist.length > 0) {
+                currentLyricPath = config.playlist[0].lrcPath;
+                console.log('设置初始歌词路径:', currentLyricPath);
+            }
+
             window.aplayer = new APlayer({
                 container: container, // 播放器容器
-                mini: false, // 是否为迷你模式 - false为完整模式
-                autoplay: false, // 改为false，避免Chrome阻止自动播放
-                theme: 'rgba(255, 255, 255, 0.0)', // 主题颜色 - 可修改为其他颜色
-                loop: 'one', // 循环模式 - 'all'全部循环, 'one'单曲循环, 'none'不循环
-                order: 'list', // 播放顺序 - 'list'列表顺序, 'random'随机播放
-                preload: 'auto', // 预加载 - 'auto'自动, 'metadata'仅元数据, 'none'不预加载
-                volume: 0.2, // 默认音量 - 0.0到1.0之间，0.1为10%音量
+                mini: config.settings.mini, // 是否为迷你模式
+                autoplay: config.settings.autoplay, // 自动播放设置
+                theme: config.settings.theme, // 主题颜色
+                loop: config.settings.loop, // 循环模式 - 'all'全部循环, 'one'单曲循环, 'none'不循环
+                order: config.settings.order, // 播放顺序 - 'list'列表顺序, 'random'随机播放
+                preload: config.settings.preload || 'none', // 预加载 - 'auto'自动, 'metadata'仅元数据, 'none'不预加载
+                volume: config.settings.volume, // 默认音量
                 mutex: true, // 互斥播放 - true表示只允许一个播放器播放
-                listFolded: false, // 播放列表是否折叠 - false为展开状态
-                listMaxHeight: 90, // 播放列表最大高度（像素）- 可调整列表显示高度
-                // 音频文件配置 - 可添加更多歌曲到这个数组
-                audio: [{
-                    name: '长岛', // 歌曲名称 - 可修改
-                    artist: '花粥', // 艺术家名称 - 可修改
-                    url: 'https://music.163.com/song/media/outer/url?id=419373910.mp3', // 音频文件URL - 可替换为其他音频链接
-                    cover: 'https://www.gequhai.com/static/img/logo.png', // 封面图片URL - 可替换为其他图片链接
-                    // 歌词配置 - LRC格式，可修改或添加实际歌词
-                    lrc: '[00:00.00] 作词 : 花粥\n[00:01.00] 作曲 : 花粥\n[00:02.00] 编曲 : 花粥'
-                }]
+                listFolded: config.settings.listFolded, // 播放列表是否折叠
+                listMaxHeight: config.settings.listMaxHeight, // 播放列表最大高度（像素）
+                // 音频文件配置 - 从配置文件加载
+                audio: audioList
             });
             
             // 强制触发重绘
@@ -546,8 +602,24 @@ function initMusicPlayer() {
             
             console.log('APlayer初始化成功！');
             
-            // 初始化歌词显示功能
+            // 初始化歌词显示功能 - 在播放器初始化后
             initLyricsDisplay();
+            
+            // 等待播放器完全初始化后，获取实际的当前歌曲索引
+            setTimeout(() => {
+                if (window.aplayer && window.aplayer.list && window.aplayer.list.index !== undefined) {
+                    const actualIndex = window.aplayer.list.index;
+                    console.log('播放器实际当前歌曲索引:', actualIndex);
+                    if (config.playlist[actualIndex]) {
+                        currentLyricPath = config.playlist[actualIndex].lrcPath;
+                        console.log('更新为实际歌曲的歌词路径:', currentLyricPath);
+                        // 重新加载正确的歌词
+                        if (lyricsDisplay) {
+                            lyricsDisplay.loadLyrics(currentLyricPath);
+                        }
+                    }
+                }
+            }, 100);
             
             // 播放器事件监听 - 用于调试和状态跟踪
             window.aplayer.on('loadstart', () => {
@@ -567,6 +639,32 @@ function initMusicPlayer() {
                 if (lyricsDisplay && lyricsDisplay.isVisible) {
                     lyricsDisplay.updateCurrentLyric(window.aplayer.audio.currentTime);
                 }
+            });
+
+            // 添加歌曲切换监听，更新歌词显示
+            window.aplayer.on('listswitch', (index) => {
+                console.log('切换到歌曲:', index.index);
+                // 更新当前歌词路径
+                if (config.playlist[index.index]) {
+                    currentLyricPath = config.playlist[index.index].lrcPath;
+                    console.log('更新歌词路径为:', currentLyricPath);
+                    // 重新加载歌词
+                    if (lyricsDisplay) {
+                        lyricsDisplay.loadLyrics(currentLyricPath);
+                    }
+                }
+                
+                // 自动折叠播放列表
+                setTimeout(() => {
+                    if (window.aplayer && window.aplayer.list) {
+                        // 检查播放列表是否展开，如果展开则折叠
+                        const listElement = document.querySelector('.aplayer-list');
+                        if (listElement && !listElement.classList.contains('aplayer-list-hide')) {
+                            console.log('自动折叠播放列表');
+                            window.aplayer.list.toggle();
+                        }
+                    }
+                }, 100); // 延迟100ms确保歌曲切换完成
             });
             
             // 设置页面滚动监听，控制播放器显示和播放状态
@@ -980,5 +1078,4 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
     star.style.animationDelay = delay + 's';
     
     container.appendChild(star);
-
 }
