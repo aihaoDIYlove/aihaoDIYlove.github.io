@@ -12,15 +12,9 @@
 
 ```html
 <div class="stars-container desktop-only" id="stars-container"></div>
-
-<div class="content-wrapper">
-    <h1> </h1>
-    <p> </p>
-</div>
 ```
 
 - `stars-container`：星星的容器，使用绝对定位覆盖在页面上方
-- `content-wrapper`：内容区域，可以放置你的标题和文字
 
 ### CSS样式
 
@@ -108,3 +102,4 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
 ### 结尾
 
 - 如果有不明白的地方可以访问我的Github博客页仓库，里面可以查看博客的所有代码
+
