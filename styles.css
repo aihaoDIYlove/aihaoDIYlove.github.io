@@ -12,8 +12,9 @@ textarea,
 }
 
 .screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
-    user-select: none !important;
     -webkit-user-select: none !important;
+    user-select: none !important;
+    
 }
 
 /* ========================================
@@ -33,11 +34,17 @@ textarea,
     overflow: hidden;
     z-index: 1000;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    /* 默认隐藏文章列表 */
-    display: none;
+    display: none; /* 默认隐藏文章列表 */
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.3s ease;
+    overflow-y: auto; /* 允许垂直滚动 */
+
+}
+
+/* Chrome和Safari隐藏滚动条 */
+.article-list-container::-webkit-scrollbar {
+    display: none; 
 }
 
 /* 只在第一页显示文章列表 */
