@@ -1,10 +1,11 @@
 # 创建网页星星闪烁效果教程
 
-本文将教你如何使用HTML、CSS和JavaScript创建一个简单美丽的星星闪烁效果，这种效果非常适合用于网站的背景点缀。
+本文将教你如何使用HTML、CSS和JavaScript创建一个简单美丽的星星闪烁效果，这种效果非常适合用于网站的背景点缀
 
 ## 效果预览
 
-- 请使用PC端访问我的博客，然后上滑，抵达音乐页即可查看效果
+- 请使用PC端访问我的博客，然后下滑，抵达音乐页即可查看效果
+- 博客链接：[dreamripples.icu](https://dreamripples.icu/)
 
 ## 代码实现
 
@@ -102,4 +103,4 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
 ### 结尾
 
 - 如果有不明白的地方可以访问我的Github博客页仓库，里面可以查看博客的所有代码
-
+- Github仓库：[aihaoDIYlove.github.io](https://github.com/aihaoDIYlove/aihaoDIYlove.github.io)
