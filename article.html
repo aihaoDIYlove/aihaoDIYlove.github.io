@@ -382,24 +382,37 @@
                     throw new Error('未指定文章ID');
                 }
                 
-                // 获取博客数据
-                console.log('正在获取博客数据...');
-                const response = await fetch('./data/blog-posts.json');
-                console.log('响应状态:', response.status, response.statusText);
+                // 第一步：获取博客索引数据
+                console.log('正在获取博客索引数据...');
+                const indexResponse = await fetch('./data/blog-posts.json');
+                console.log('索引响应状态:', indexResponse.status, indexResponse.statusText);
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                if (!indexResponse.ok) {
+                    throw new Error(`索引文件HTTP错误! 状态: ${indexResponse.status}`);
                 }
                 
-                const blogPosts = await response.json();
-                console.log('博客数据加载成功，文章数量:', blogPosts.length);
+                const blogPosts = await indexResponse.json();
+                console.log('博客索引数据加载成功，文章数量:', blogPosts.length);
                 
-                const article = blogPosts.find(post => post.id === articleId);
-                console.log('找到的文章:', article ? article.title : '未找到');
+                // 从索引中查找文章基本信息
+                const articleIndex = blogPosts.find(post => post.id === articleId);
+                console.log('找到的文章索引:', articleIndex ? articleIndex.title : '未找到');
                 
-                if (!article) {
+                if (!articleIndex) {
                     throw new Error('文章不存在');
                 }
+                
+                // 第二步：加载文章详细内容
+                console.log('正在加载文章详细内容...');
+                const contentResponse = await fetch(`./articles/${articleId}.json`);
+                console.log('内容响应状态:', contentResponse.status, contentResponse.statusText);
+                
+                if (!contentResponse.ok) {
+                    throw new Error(`文章内容文件HTTP错误! 状态: ${contentResponse.status}`);
+                }
+                
+                const article = await contentResponse.json();
+                console.log('文章内容加载成功:', article.title);
                 
                 // 更新页面标题
                 document.title = `${article.title} - 个人网站`;
@@ -407,7 +420,7 @@
                 // 渲染文章内容
                 document.getElementById('article-title').textContent = article.title;
                 document.getElementById('article-date').textContent = article.date;
-                document.getElementById('article-filename').textContent = article.filename;
+                document.getElementById('article-filename').textContent = articleIndex.filename;
                 
                 // 渲染标签
                 const tagsContainer = document.getElementById('article-tags');
