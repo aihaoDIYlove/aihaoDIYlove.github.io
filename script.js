@@ -571,7 +571,7 @@ async function initMusicPlayer() {
                 name: song.name,
                 artist: song.artist,
                 url: song.url,
-                cover: song.cover,
+                cover: song.cover === 'default' ? config.defaultCover : song.cover,
                 lrc: song.lrcPath // APlayer会自动加载LRC文件
             }));
 
