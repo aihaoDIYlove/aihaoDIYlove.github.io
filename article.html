@@ -8,7 +8,7 @@
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
     <title>文章详情 - 个人网站</title>
-    <link rel="stylesheet" href="styles.css?v=1.4">
+    <!-- <link rel="stylesheet" href="styles.css?v=1.5"> -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <!-- 引入marked.js用于Markdown渲染 - 使用v4版本以兼容旧版浏览器 -->
@@ -45,11 +45,11 @@
             max-width: 800px;
             margin: 0 auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            -webkit-backdrop-filter: blur(15px);
-            backdrop-filter: blur(15px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             margin-top: 80px;
             margin-bottom: 40px;
@@ -242,7 +242,7 @@
             border-radius: 0 30px 30px 0; /* 右侧半圆形 */
             color: #ffffff;
             cursor: pointer;
-            z-index: 1001;
+            z-index: 10;
             transition: all 0.3s ease;
             box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
             outline: none;
@@ -334,8 +334,8 @@
             <div class="article-header">
                 <h1 class="article-title" id="article-title"></h1>
                 <div class="article-meta">
-                    <span>📅 <span id="article-date"></span></span>
-                    <span>📝 <span id="article-filename"></span></span>
+                    <span>时间： <span id="article-date"></span></span>
+                    <span>文件名： <span id="article-filename"></span></span>
                 </div>
                 <div class="article-tags" id="article-tags"></div>
             </div>

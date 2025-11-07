@@ -32,7 +32,7 @@ textarea,
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     overflow: hidden;
-    z-index: 1000;
+    z-index: 10;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     display: none; /* 默认隐藏文章列表 */
     opacity: 0;
@@ -293,7 +293,7 @@ html, body {
     top: 30px;
     /* 距离左侧距离 - 可调整 */
     left: 30px;
-    z-index: 999;
+    z-index: 9;
     padding: 0;
     height: auto;
 }
@@ -393,7 +393,7 @@ html, body {
     display: flex;
     /* 图标间距 - 20px，可调整 */
     gap: 20px;
-    z-index: 1000;
+    z-index: 10;
 }
 
 /* 社交媒体链接样式 */
@@ -586,7 +586,7 @@ html, body {
     left: 0.75rem !important;
     /* 播放器宽度 - 11.25rem，可调整 */
     width: 11.25rem !important;
-    z-index: 1000 !important;
+    z-index: 10 !important;
     /* 背景颜色 - 半透明黑色 rgba(0, 0, 0, 0.35) */
     background: rgba(0, 0, 0, 0.35) !important;
     /* 圆角大小 - 0.75rem */
@@ -627,7 +627,7 @@ html, body {
     -webkit-transform: translateY(0) !important;
     transform: translateY(0) !important;
     /* 确保层级 */
-    z-index: 1000 !important;
+    z-index: 10 !important;
     /* Chrome移动端强制显示 - 更激进的方式 */
     -webkit-appearance: initial !important;
     appearance: initial !important;
@@ -661,7 +661,7 @@ html, body {
     left: 10px !important;
     /* 播放器宽度 - 250px，可调整 */
     width: 250px !important;
-    z-index: 1000 !important;
+    z-index: 10 !important;
     /* 背景颜色 - 半透明黑色 rgba(0, 0, 0, 0.1) */
     background: rgba(0, 0, 0, 0.1) !important;
     /* 圆角大小 - 15px */
@@ -918,7 +918,7 @@ html, body {
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    z-index: 1000;
+    z-index: 10;
 }
 
 .floating-btn:hover {
@@ -1074,7 +1074,7 @@ html, body {
     transform: translateX(100%);
     opacity: 0;
     transition: all 0.3s ease;
-    z-index: 999;
+    z-index: 9;
 }
 
 .search-container.active {
@@ -1263,7 +1263,7 @@ html, body {
     border-radius: 0 30px 30px 0; /* 右侧半圆形 */
     color: #ffffff;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 11;
     -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);

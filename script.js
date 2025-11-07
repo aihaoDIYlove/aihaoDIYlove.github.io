@@ -955,7 +955,7 @@ function initMobileArticleListControl() {
         }, 100);
     }, { passive: false });
     
-    // 收起按钮点击事件 - 增强Chrome移动端兼容性
+    // 收起按钮点击事件
     collapseBtn.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -971,7 +971,7 @@ function initMobileArticleListControl() {
         }, 300); // 等待收起动画完成
     });
     
-    // 添加触摸事件支持（Chrome移动端）
+    // 添加触摸事件支持
     collapseBtn.addEventListener('touchstart', function(event) {
         event.preventDefault();
         event.stopPropagation();
