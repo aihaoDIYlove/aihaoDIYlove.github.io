@@ -16,6 +16,63 @@ textarea,
     user-select: none !important;
     
 }
+/* ========================================
+   全局样式重置和基础设置
+   ======================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* 隐藏滚动条 */
+    /* 字体设置 - 可调整字体族 */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    /* 全局文字颜色 - 白色 #ffffff */
+    color: #ffffff;
+}
+
+/* ========================================
+   滚动容器和页面布局设置
+   ======================================== */
+.scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+
+.page {
+    width: 100%;
+    /* 页面高度 - 占满整个视口 */
+    height: 100vh;
+    scroll-snap-align: start;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* 确保页面内容不会溢出 */
+}
+
+/* ========================================
+   第一页背景设置 (主页面)
+   ======================================== */
+#page-1 {
+    /* 背景图片路径 - 主页背景 */
+    background-image: url('/background.png') !important;
+    /* 背景尺寸  */
+    background-size: cover !important;
+    /* 背景位置 - 居中显示 */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
 
 /* ========================================
    文章列表样式
@@ -38,8 +95,6 @@ textarea,
     opacity: 0;
     transform: translateY(20px);
     transition: all 0.3s ease;
-    /* overflow-y: auto; 允许垂直滚动 */
-
 }
 
 /* 只在第一页显示文章列表 */
@@ -190,77 +245,6 @@ textarea,
 
 .article-list::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
-}
-
-/* ========================================
-   全局样式重置和基础设置
-   ======================================== */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* 隐藏滚动条 */
-    /* 字体设置 - 可调整字体族 */
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* 全局文字颜色 - 白色 #ffffff */
-    color: #ffffff;
-}
-
-/* ========================================
-   滚动容器和页面布局设置
-   ======================================== */
-.scroll-container {
-    width: 100%;
-    height: 100%;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-}
-
-.page {
-    width: 100%;
-    /* 页面高度 - 占满整个视口 */
-    height: 100vh;
-    scroll-snap-align: start;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* 确保页面内容不会溢出 */
-}
-
-/* ========================================
-   第一页背景设置 (主页面)
-   ======================================== */
-#page-1 {
-    /* 背景图片路径 - 原主页背景 */
-    background-image: url('/background.png') !important;
-    /* 背景尺寸 - cover确保图片覆盖整个区域 */
-    background-size: cover !important;
-    /* 背景位置 - 居中显示 */
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-}
-
-/* 第一页遮罩层 - 调整透明度可改变暗化程度 */
-#page-1::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* 遮罩颜色和透明度 - rgba(0, 0, 0, 0.4) 黑色40%透明度 */
-    background-color: rgba(0, 0, 0, 0.4);
-    z-index: 1;
 }
 
 /* ========================================
@@ -934,131 +918,7 @@ html, body {
     fill: currentColor;
 }
 
-/* 搜索按钮默认隐藏 */
-.search-btn {
-    display: none;
-}
-
-/* 博客页面专用搜索按钮 - 使用JavaScript控制显示 */
-.search-btn.blog-only {
-    display: none;
-}
-
-/* 博客按钮默认隐藏 */
-.blog-btn {
-    display: none;
-}
-
-/* 主页专用博客按钮 */
-.blog-btn.main-only {
-    display: none;
-}
-
-/* ========================================
-   博客页面样式
-   ======================================== */
-
-.blog-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-/* 博客页面标题 */
-.blog-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.blog-header h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    background: linear-gradient(45deg, #ffffff, #cccccc);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.blog-header p {
-    font-size: 1.2rem;
-    color: #cccccc;
-}
-
-/* 博客内容区域 */
-.blog-content {
-    flex: 1;
-    overflow-y: auto;
-    padding-right: 10px;
-}
-
-.blog-posts {
-    display: grid;
-    gap: 30px;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-}
-
-/* 博客文章卡片 */
-.blog-post {
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 15px;
-    padding: 25px;
-    transition: all 0.3s ease;
-}
-
-.blog-post:hover {
-    background: rgba(255, 255, 255, 0.15);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.blog-post h2 {
-    font-size: 1.5rem;
-    margin-bottom: 15px;
-    color: #ffffff;
-}
-
-.post-meta {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 15px;
-    font-size: 0.9rem;
-}
-
-.post-date {
-    color: #cccccc;
-}
-
-.post-category {
-    background: rgba(255, 255, 255, 0.2);
-    padding: 2px 8px;
-    border-radius: 12px;
-    color: #ffffff;
-}
-
-.post-excerpt {
-    color: #cccccc;
-    line-height: 1.6;
-    margin-bottom: 20px;
-}
-
-.read-more {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: 500;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
-}
-
-.read-more:hover {
-    border-bottom-color: #ffffff;
-}
-
-/* 搜索容器 */
+/* 博客列表 */
 .search-container {
     position: fixed;
     bottom: 30px;
@@ -1119,148 +979,22 @@ html, body {
     fill: #ffffff;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .floating-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-    }
-    
-    .floating-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .blog-header h1 {
-        font-size: 2rem;
-    }
-    
-    .blog-posts {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .search-container {
-        right: 80px;
-    }
-    
-    .search-input {
-        width: 200px;
-    }
-}
-
-
-/* 搜索结果样式 */
-.no-results-message,
-.no-posts-message,
-.error-message {
-    text-align: center;
-    padding: 3rem 2rem;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    margin: 2rem 0;
-}
-
-.no-results-message h3,
-.no-posts-message h3,
-.error-message h3 {
-    color: #ffffff;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-}
-
-.no-results-message p,
-.no-posts-message p,
-.error-message p {
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 1rem;
-    line-height: 1.6;
-}
-
-.error-detail {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.6);
-    font-family: monospace;
-}
-
-.clear-search-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-}
-
-.clear-search-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.search-submit svg {
-    width: 18px;
-    height: 18px;
-    fill: #ffffff;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .floating-btn {
-        bottom: 20px;
-        right: 20px;
-        width: 50px;
-        height: 50px;
-    }
-    
-    .floating-btn svg {
-        width: 20px;
-        height: 20px;
-    }
-    
-    .blog-header h1 {
-        font-size: 2rem;
-    }
-    
-    .blog-posts {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .search-container {
-        right: 80px;
-    }
-    
-    .search-input {
-        width: 200px;
-    }
-}
-
-
 /* ========================================
    移动端文章列表控制按钮
    ======================================== */
-
-/* 移动端展开按钮 - 半圆形，位于左边框中等偏下位置 */
 .mobile-expand-btn {
     display: none; /* 默认隐藏，只在移动端显示 */
     position: fixed;
     left: 0;
-    top: 30%; /* 中等偏下位置 */
+    top: 30%;
     width: 40px;
     height: 40px;
     background: rgba(255, 255, 255, 0.1);
-    /* 添加webkit前缀以提高Chrome移动端兼容性 */
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: none;
-    border-radius: 0 30px 30px 0; /* 右侧半圆形 */
+    border-radius: 0 30px 30px 0;
     color: #ffffff;
     cursor: pointer;
     z-index: 11;
@@ -1312,25 +1046,25 @@ html, body {
 @media screen and (max-width: 768px) {
     /* 默认隐藏展开按钮 */
     .mobile-expand-btn {
-        display: none !important;
+        display: none;
     }
     
     /* 只在第一页且页面激活时显示展开按钮 */
     body.page-1-active #page-1.visible .mobile-expand-btn {
-        display: flex !important;
+        display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 1 !important;
-        visibility: visible !important;
+        opacity: 1;
+        visibility: visible;
     }
     
     /* 显示移动端收起按钮 - 只在第一页显示 */
     #page-1.visible .mobile-collapse-btn {
-        display: flex !important;
+        display: flex;
         align-items: center;
         justify-content: center;
-        opacity: 1 !important;
-        visibility: visible !important;
+        opacity: 1;
+        visibility: visible;
     }
     
     /* 确保在第二页时隐藏展开按钮 */
@@ -1340,7 +1074,7 @@ html, body {
         visibility: hidden !important;
     }
     
-    /* 调整文章列表容器在移动端的样式 - 使用更高优先级的选择器 */
+    /* 调整文章列表容器在移动端的样式 */
     #page-1.visible .article-list-container {
         left: 10px;
         right: 10px;
@@ -1348,7 +1082,7 @@ html, body {
         max-width: none;
         bottom: 10px;
         max-height: 70vh; /* 限制最大高度，避免占据过多空间 */
-        -webkit-transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
+        -webkit-transform: translateX(-100%); /* 默认隐藏在左侧 */
         transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
         opacity: 0 !important;
         -webkit-transition: all 0.2s ease;
@@ -1401,7 +1135,7 @@ html, body {
 }
 
 /* ========================================
-   歌词显示样式
+   星星显示样式
    ======================================== */
 
 /* 星星闪烁效果 */
@@ -1445,15 +1179,19 @@ html, body {
     display: none;
 }
 
-/* 统一歌词显示容器（桌面端和移动端共用） */
+/* ========================================
+   歌词显示样式
+   ======================================== */
+
+/* 歌词显示容器 */
 .mobile-lyrics-container {
-    display: block; /* 桌面端和移动端都显示 */
+    display: block;
     position: absolute;
     top: calc(70% - 100px); /* 上移100像素 */
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
-    height: auto; /* 改为自动高度，适应三行显示 */
+    height: auto; /* 自动高度 */
     z-index: 5; /* 确保在所有背景层之上 */
     pointer-events: none;
     overflow: hidden;
