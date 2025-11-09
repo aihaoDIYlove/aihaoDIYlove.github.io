@@ -11,30 +11,17 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <!-- 阻止深色模式 -->
     <meta name="color-scheme" content="dark">
-    <!-- 主要样式文件 -->
-    <link rel="stylesheet" href="styles.css?v=1.6">
-    
-    <!-- APlayer音乐播放器CSS - 提供播放器基础样式 -->
+    <link rel="stylesheet" href="styles.css?v=1.7">
     <link rel="stylesheet" href="libs\APlayer.min.css">
 </head>
 <body>
-    <!-- 
-    滚动容器 - 包含所有页面内容
-    用于实现页面间的平滑滚动效果
-    -->
+    <!-- 滚动容器 - 包含所有页面内容-->
     <div class="scroll-container">
         
-        <!-- 
-        第一页 - 主页面
-        包含标题、社交媒体链接和主要内容
-        -->
+        <!-- 第一页 - 主页面 -->
         <section class="page" id="page-1">
             <div class="container">
-                
-                <!-- 
-                顶部标题区域
-                包含打字机效果的文本显示
-                -->
+                <!-- 顶部标题区域 -->
                 <header class="header">
                     <div class="typewriter-container">
                         <div class="dialog-box">
@@ -46,27 +33,20 @@
                     </div>
                 </header>
 
-                <!-- 
-                右上角社交媒体图标导航
-                包含GitHub、Bilibili、知乎等平台链接
-                图标尺寸和颜色可在CSS中调整
-                -->
+                <!-- 右上角社交媒体图标导航 -->
                 <nav class="social-nav">
-                    
                     <!-- GitHub链接 -->
                     <a href="#" class="social-link" id="github-link" title="GitHub">
                         <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
                     </a>
-                    
                     <!-- Bilibili链接 -->
                     <a href="#" class="social-link" id="bilibili-link" title="Bilibili">
                         <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M17.813 4.653h.854c1.51.054 2.769.578 3.773 1.574 1.004.995 1.524 2.249 1.56 3.76v7.36c-.036 1.51-.556 2.769-1.56 3.773s-2.262 1.524-3.773 1.56H5.333c-1.51-.036-2.769-.556-3.773-1.56S.036 18.858 0 17.347v-7.36c.036-1.511.556-2.765 1.56-3.76 1.004-.996 2.262-1.52 3.773-1.574h.774l-1.174-1.12a1.234 1.234 0 0 1-.373-.906c0-.356.124-.658.373-.907l.027-.027c.267-.249.573-.373.92-.373.347 0 .653.124.92.373L9.653 4.44c.071.071.134.142.187.213h4.267a.836.836 0 0 1 .16-.213l2.853-2.747c.267-.249.573-.373.92-.373.347 0 .662.151.929.4.267.249.391.551.391.907 0 .356-.124.657-.373.906l-1.174 1.12zM6.4 15.64h.48a.926.926 0 0 0 .96-.96V9.6a.926.926 0 0 0-.96-.96H6.4a.926.926 0 0 0-.96.96v5.08c0 .533.427.96.96.96zm5.333 0h.48a.926.926 0 0 0 .96-.96V9.6a.926.926 0 0 0-.96-.96h-.48a.926.926 0 0 0-.96.960v5.08c0 .533.427.96.96.96z"/>
                         </svg>
                     </a>
-                    
                     <!-- 知乎链接 -->
                     <a href="#" class="social-link" id="zhihu-link" title="知乎">
                         <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -74,23 +54,14 @@
                         </svg>
                     </a>
                 </nav>
-
-                <!-- 
-                主要内容区域
-                第二页的核心内容展示区域
-                -->
+                <!-- 主要内容区域 -->
                 <main class="main-content">
                     <div class="content-wrapper">
                         <h1> 施工中...</h1>
                         <p>这里目前还没有太多东西</p>
                     </div>
                 </main>
-
-                <!-- 
-                文章列表容器
-                位置：固定在页面左下角
-                样式：半透明毛玻璃效果
-                -->
+                <!-- 文章列表容器 -->
                 <div class="article-list-container">
                     <!-- 搜索输入框和放大镜图标 -->
                     <div class="search-header">
@@ -107,7 +78,6 @@
                             </svg>
                         </div>
                     </div>
-                    
                     <!-- 文章列表 -->
                     <div class="article-list">
                         <div class="article-item">
@@ -127,54 +97,35 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- 移动端展开按钮 -->
                 <button class="mobile-expand-btn" aria-label="展开文章列表">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/>
                     </svg>
                 </button>
-                
-
             </div>
         </section>
         
-        <!-- 
-        第二页 - 副页面
-        包含音乐播放器和其他内容
-        背景图片和样式可在CSS中调整
-        -->
+        <!-- 第二页 - 副页面 -->
         <section class="page" id="page-2">
             <!-- 星星闪烁效果容器 - 桌面端 -->
             <div class="stars-container desktop-only" id="stars-container"></div>
-            
             <div class="content-wrapper">
-                <h1> </h1>
-                <p> </p>
+                <!-- <h1> </h1>
+                <p> </p> -->
             </div>
-            
-            
             <!-- 歌词显示容器 -->
             <div id="mobile-lyrics-container" class="mobile-lyrics-container">
                 <div class="mobile-lyrics-content" id="mobile-lyrics-content">
                     <!-- 歌词将通过JavaScript动态生成 -->
                 </div>
             </div>
-            
-            <!-- 
-            音乐播放器容器
-            位置：固定在页面左下角
-            样式：半透明毛玻璃效果
-            显示条件：只在第三页可见时显示
-            尺寸和颜色可在CSS的.music-player和#aplayer中调整
-            -->
+            <!-- 音乐播放器容器 -->
             <div id="aplayer" class="music-player"></div>
         </section>
     </div>
-
     <!-- 主要JavaScript功能文件 -->
-    <script src="script.js?v=1.6"></script>
-    
+    <script src="script.js?v=1.7"></script>
     <!-- APlayer音乐播放器JavaScript库 - 提供播放器功能 -->
     <script src="libs\APlayer.min.js"></script>
 </body>
