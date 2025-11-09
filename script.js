@@ -526,7 +526,7 @@ async function initMusicPlayer() {
     // 先加载音乐配置
     const config = await loadMusicConfig();
     
-    // 延迟初始化确保DOM完全加载 - 1000毫秒延迟
+    // 延迟初始化确保DOM完全加载 - 500毫秒延迟
     setTimeout(() => {
         console.log('检查APlayer库和容器');
         
@@ -673,7 +673,7 @@ async function initMusicPlayer() {
         } catch (error) {
             console.error('APlayer初始化失败:', error);
         }
-    }, 1000); // 延迟1秒确保所有资源加载完成
+    }, 500); // 延迟500ms确保所有资源加载完成
 }
 
 /* ========================================
