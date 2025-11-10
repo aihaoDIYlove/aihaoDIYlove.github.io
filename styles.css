@@ -1,3 +1,6 @@
+/* ========================================
+   外部库样式重置
+   ======================================== */
 a,
 area,
 button,
@@ -14,8 +17,8 @@ textarea,
 .screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
     -webkit-user-select: none !important;
     user-select: none !important;
-    
 }
+
 /* ========================================
    全局样式重置和基础设置
    ======================================== */
@@ -61,7 +64,7 @@ html, body {
 }
 
 /* ========================================
-   第一页背景设置 (主页面)
+   页面背景设置
    ======================================== */
 #page-1 {
     /* 背景图片路径 - 主页背景 */
@@ -74,9 +77,26 @@ html, body {
     background-attachment: fixed !important;
 }
 
+#page-2 {
+    /* 背景图片路径 - 音乐页面背景 */
+    background-image: url('/background-page-2.webp') !important;
+    /* 背景尺寸 - cover确保图片覆盖整个区域 */
+    background-size: cover !important;
+    /* 背景位置 - 居中显示 */
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+
 /* ========================================
    文章列表样式
    ======================================== */
+.container {
+    min-height: 100vh;
+    position: relative;
+    z-index: 2;
+}
+
 .article-list-container {
     position: fixed;
     bottom: 20px;
@@ -182,8 +202,6 @@ html, body {
 .article-item:nth-child(1) { animation-delay: 0.1s; }
 .article-item:nth-child(2) { animation-delay: 0.2s; }
 .article-item:nth-child(3) { animation-delay: 0.3s; }
-.article-item:nth-child(4) { animation-delay: 0.4s; }
-/* .article-item:nth-child(5) { animation-delay: 0.5s; } */
 
 /* 滑入动画关键帧 */
 @keyframes slideInUp {
@@ -245,26 +263,6 @@ html, body {
 
 .article-list::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.5);
-}
-
-/* ========================================
-   第二页背景设置 (音乐页面)
-   ======================================== */
-#page-2 {
-    /* 背景图片路径 - 音乐页面背景 */
-    background-image: url('/background-page-2.webp') !important;
-    /* 背景尺寸 - cover确保图片覆盖整个区域 */
-    background-size: cover !important;
-    /* 背景位置 - 居中显示 */
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
-}
-
-.container {
-    min-height: 100vh;
-    position: relative;
-    z-index: 2; /* 确保内容在遮罩层之上 */
 }
 
 /* ========================================
@@ -849,7 +847,7 @@ html, body {
 }
 
 /* ========================================
-   浮动按钮通用样式
+   浮动按钮和搜索框样式
    ======================================== */
 .floating-btn {
     position: fixed;
@@ -887,7 +885,6 @@ html, body {
     fill: currentColor;
 }
 
-/* 博客列表 */
 .search-container {
     position: fixed;
     bottom: 30px;
@@ -955,9 +952,9 @@ html, body {
     display: none; /* 默认隐藏，只在移动端显示 */
     position: fixed;
     left: 0;
-    top: 30%;
-    width: 40px;
-    height: 40px;
+    top: 35%;
+    width: 2.1875rem;
+    height: 3.125rem;
     background: rgba(255, 255, 255, 0.1);
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
@@ -973,27 +970,15 @@ html, body {
     outline: none;
 }
 
-.mobile-expand-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-transform: translateX(2px);
-    transform: translateX(2px);
-}
-
-.mobile-expand-btn svg {
-    width: 20px;
-    height: 20px;
-    margin-left: 4px; /* 稍微向右偏移 */
-}
-
 /* 移动端收起按钮 - 位于搜索框左侧 */
 .mobile-collapse-btn {
-    display: none; /* 默认隐藏，只在移动端显示 */
+    display: none;
     background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 6px;
-    width: 32px;
+    width: 30px;
     height: 32px;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     margin-right: 8px;
     -webkit-transition: all 0.3s ease;
@@ -1003,21 +988,14 @@ html, body {
 }
 
 .mobile-collapse-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-}
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-transform: translateX(2px);
+    transform: translateX(2px);
 
-.mobile-collapse-btn svg {
-    width: 18px;
-    height: 18px;
 }
 
 /* 移动端 */
 @media screen and (max-width: 540px) {
-    /* 默认隐藏展开按钮 */
-    .mobile-expand-btn {
-        display: none;
-    }
-    
     /* 只在第一页且页面激活时显示展开按钮 */
     body.page-1-active #page-1.visible .mobile-expand-btn {
         display: flex;
@@ -1036,13 +1014,6 @@ html, body {
         visibility: visible;
     }
     
-    /* 确保在第二页时隐藏展开按钮 */
-    #page-2.visible .mobile-expand-btn {
-        display: none !important;
-        opacity: 0 !important;
-        visibility: hidden !important;
-    }
-    
     /* 调整文章列表容器在移动端的样式 */
     #page-1.visible .article-list-container {
         left: 10px;
@@ -1051,7 +1022,7 @@ html, body {
         max-width: none;
         bottom: 10px;
         max-height: 70vh; /* 限制最大高度，避免占据过多空间 */
-        -webkit-transform: translateX(-100%); /* 默认隐藏在左侧 */
+        -webkit-transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
         transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
         opacity: 0 !important;
         -webkit-transition: all 0.2s ease;
@@ -1075,32 +1046,12 @@ html, body {
         -webkit-transition: all 0.3s ease !important;
         transition: all 0.3s ease !important;
     }
-    .mobile-expand-btn {
-        width: 2.1875rem;
-        height: 3.125rem;
-        top: 40%;
-    }
     
     .mobile-expand-btn svg {
         width: 1.125rem;
         height: 1.125rem;
     }
-    
-    /* 调整搜索头部布局 */
-    .search-header {
-        padding: 10px;
-    }
-    
-    /* 调整搜索输入框 */
-    .search-input {
-        font-size: 16px; /* 防止iOS缩放 */
-    }
-    
-    /* 调整文章列表滚动 */
-    .article-list {
-        max-height: calc(70vh - 60px); /*减去搜索头部高度 */
-        overflow-y: auto;
-    }
+
 }
 
 /* ========================================
@@ -1138,16 +1089,6 @@ html, body {
     }
 }
 
-/* 桌面端显示类 */
-.desktop-only {
-    display: block;
-}
-
-/* 移动端显示类 */
-.mobile-only {
-    display: none;
-}
-
 /* ========================================
    歌词显示样式
    ======================================== */
@@ -1169,14 +1110,14 @@ html, body {
 /* 桌面端样式优化 */
 @media screen and (min-width: 541px) {
     .mobile-lyrics-container {
-        width: 80%; /* 桌面端稍微窄一些 */
-        top: calc(65% - 100px); /* 桌面端位置上移100像素 */
+        width: 80%;
+        top: calc(65% - 100px);
     }
 }
 
 .mobile-lyrics-content {
     width: 100%;
-    height: auto; /* 改为自动高度 */
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -1192,9 +1133,9 @@ html, body {
 .mobile-lyric-line {
     color: white;
     text-align: center;
-    font-size: 16px; /* 稍微增大字体 */
+    font-size: 16px;
     line-height: 1.8;
-    margin: 8px 0; /* 增加行间距 */
+    margin: 8px 0;
     opacity: 0.5;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
@@ -1204,7 +1145,6 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     flex-shrink: 0;
-    /* 为动画过渡做准备 */
     transform: translateY(0);
     will-change: transform, opacity;
 }
@@ -1223,18 +1163,18 @@ html, body {
 /* 桌面端歌词行样式优化 */
 @media screen and (min-width: 541px) {
     .mobile-lyric-line {
-        font-size: 18px; /* 桌面端字体稍大 */
-        line-height: 2.0; /* 桌面端行高稍大 */
+        font-size: 18px;
+        line-height: 2.0;
         margin: 10px 0;
     }
     
     .mobile-lyric-line.mobile-current {
-        font-size: 22px; /* 桌面端当前歌词更大 */
+        font-size: 22px;
         margin: 15px 0;
     }
     
     .mobile-lyric-line.mobile-next {
-        font-size: 17px; /* 桌面端下一句字体 */
+        font-size: 17px;
     }
 }
 
