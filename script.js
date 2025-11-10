@@ -228,7 +228,7 @@ class LyricsDisplay {
         this.parser = new LRCParser();
         this.currentIndex = -1;
         this.isVisible = false;
-        this.isMobile = window.innerWidth <= 768;
+        this.isMobile = window.innerWidth <= 540;
         
         // 缓存移动端歌词元素，避免频繁DOM查询
         this.mobileLyricElements = [];
@@ -990,7 +990,7 @@ function initMobileArticleListControl() {
     // 点击文章列表外部区域收起（仅在移动端）
     document.addEventListener('click', function(event) {
         // 检查是否为移动端
-        if (window.innerWidth <= 768) {
+        if (window.innerWidth <= 540) {
             const isClickInsideList = articleListContainer.contains(event.target);
             const isClickOnExpandBtn = expandBtn.contains(event.target);
             const isClickOnCollapseBtn = collapseBtn.contains(event.target);
@@ -1006,7 +1006,7 @@ function initMobileArticleListControl() {
     
     // 监听窗口大小变化，处理桌面端/移动端切换
     window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 540) {
             // 桌面端：移除展开状态，恢复展开按钮
             articleListContainer.classList.remove('expanded');
             expandBtn.style.opacity = '1';
