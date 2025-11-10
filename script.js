@@ -76,6 +76,9 @@ class TypewriterAnimation {
 /* ========================================
    歌词显示初始化功能
    ======================================== */
+// 歌词缓存对象 - 存储已加载的歌词内容
+const lyricsCache = new Map();
+
 // 初始化歌词显示功能
 function initLyricsDisplay() {
     console.log('初始化歌词显示功能');
@@ -83,6 +86,9 @@ function initLyricsDisplay() {
     
     // 创建歌词显示实例
     lyricsDisplay = new LyricsDisplay();
+    
+    // 预加载所有歌词文件
+    preloadAllLyrics();
     
     // 只有在有明确歌词路径时才加载歌词
     if (currentLyricPath) {
@@ -95,6 +101,57 @@ function initLyricsDisplay() {
     lyricsDisplay.setVisible(false);
     
     console.log('歌词显示功能初始化完成');
+}
+
+// 预加载所有歌词文件
+async function preloadAllLyrics() {
+    if (!musicConfig || !musicConfig.playlist) return;
+    
+    console.log('开始预加载歌词文件...');
+    
+    // 智能预加载策略：优先预加载前几首歌曲的歌词
+    const playlist = musicConfig.playlist;
+    const preloadCount = Math.min(5, playlist.length); // 预加载前5首或更少
+    
+    // 并行预加载前几首歌曲的歌词
+    const priorityPromises = playlist.slice(0, preloadCount).map(async (song, index) => {
+        if (song.lrcPath && !lyricsCache.has(song.lrcPath)) {
+            try {
+                const response = await fetch(song.lrcPath);
+                if (response.ok) {
+                    const lrcContent = await response.text();
+                    lyricsCache.set(song.lrcPath, lrcContent);
+                    console.log(`歌词预加载成功: ${song.name}`);
+                }
+            } catch (error) {
+                console.warn(`歌词预加载失败: ${song.name}`, error);
+            }
+        }
+    });
+    
+    // 异步预加载剩余歌词（低优先级）
+    const remainingPromises = playlist.slice(preloadCount).map(async (song, index) => {
+        if (song.lrcPath && !lyricsCache.has(song.lrcPath)) {
+            try {
+                // 延迟加载剩余歌词，避免网络拥塞
+                await new Promise(resolve => setTimeout(resolve, 1000 + index * 500));
+                const response = await fetch(song.lrcPath);
+                if (response.ok) {
+                    const lrcContent = await response.text();
+                    lyricsCache.set(song.lrcPath, lrcContent);
+                    console.log(`歌词预加载成功: ${song.name}`);
+                }
+            } catch (error) {
+                console.warn(`歌词预加载失败: ${song.name}`, error);
+            }
+        }
+    });
+    
+    // 不等待所有预加载完成，避免阻塞主线程
+    Promise.allSettled([...priorityPromises, ...remainingPromises]).then(results => {
+        const successful = results.filter(r => r.status === 'fulfilled').length;
+        console.log(`歌词预加载完成: ${successful}/${playlist.length} 成功`);
+    });
 }
 
 /* ========================================
@@ -238,18 +295,34 @@ class LyricsDisplay {
         this.isAnimating = false; // 动画状态锁
     }
 
-    // 加载歌词文件
+    // 加载歌词文件 - 优先使用缓存
     async loadLyrics(lrcUrl) {
         try {
             console.log('开始加载歌词文件:', lrcUrl);
+            
+            // 检查缓存中是否有歌词内容
+            if (lyricsCache.has(lrcUrl)) {
+                console.log('使用缓存的歌词内容');
+                const lrcContent = lyricsCache.get(lrcUrl);
+                this.parser.parse(lrcContent);
+                this.renderLyrics();
+                console.log('歌词加载成功（从缓存）');
+                return;
+            }
+            
+            // 缓存中没有，发起网络请求
             const response = await fetch(lrcUrl);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const lrcContent = await response.text();
+            
+            // 将歌词内容存入缓存
+            lyricsCache.set(lrcUrl, lrcContent);
+            
             this.parser.parse(lrcContent);
             this.renderLyrics();
-            console.log('歌词加载成功');
+            console.log('歌词加载成功（从网络）');
         } catch (error) {
             console.error('歌词加载失败:', error);
             this.showError('歌词加载失败');
@@ -464,6 +537,17 @@ class LyricsDisplay {
         }
     }
 
+    // 清空歌词显示
+    clearLyrics() {
+        if (this.mobileContent) {
+            this.mobileContent.innerHTML = '';
+            this.mobileLyricElements = [];
+        }
+        this.currentIndex = -1;
+        this.lastMobileIndex = -1;
+        this.parser.lyrics = [];
+    }
+
     // 显示/隐藏歌词容器
     setVisible(visible) {
         this.isVisible = visible;
@@ -648,9 +732,16 @@ async function initMusicPlayer() {
                 if (config.playlist[index.index]) {
                     currentLyricPath = config.playlist[index.index].lrcPath;
                     console.log('更新歌词路径为:', currentLyricPath);
-                    // 重新加载歌词
+                    
+                    // 立即更新歌词显示，不等待网络请求
                     if (lyricsDisplay) {
-                        lyricsDisplay.loadLyrics(currentLyricPath);
+                        // 先清空当前歌词显示，避免显示旧歌词
+                        lyricsDisplay.clearLyrics();
+                        
+                        // 异步加载歌词，不阻塞歌曲切换
+                        setTimeout(() => {
+                            lyricsDisplay.loadLyrics(currentLyricPath);
+                        }, 50); // 微小延迟确保歌曲切换优先
                     }
                 }
                 
