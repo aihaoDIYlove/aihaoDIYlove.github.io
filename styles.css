@@ -680,28 +680,15 @@ html, body {
 /* ========================================
    响应式设计 - 音乐播放器适配
    ======================================== */
-/* 桌面端音乐播放器调整 */
-@media (min-width: 541px) {
-    .music-player, #aplayer {
-        /* 桌面端播放器宽度 - 14rem */
-        width: 14rem !important;
-        /* 桌面端底部距离 - 0.625rem */
-        bottom: 0.625rem !important;
-        /* 桌面端左侧距离 - 0.625rem */
-        left: 0.625rem !important;
-    }
-}
-
-/* 移动端音乐播放器调整 */
 @media (max-width: 540px) {
     /* 移动端第二页背景处理 - 双层背景设计优化小屏幕显示 */
-#page-2 {
+    #page-2 {
     position: relative;
     background: none !important;
-}
+    }
 
 /* 背景双层处理 - 底层模糊背景 + 顶层清晰背景 */
-#page-2::before, #page-2::after {
+    #page-2::before, #page-2::after {
     content: '';
     position: absolute;
     left: 0;
@@ -710,23 +697,23 @@ html, body {
     background-image: url('/background-page-2.webp');
     background-position: center;
     background-repeat: no-repeat;
-}
+    }
 
 /* 底层背景 - 模糊效果作为背景氛围 */
-#page-2::before {
+    #page-2::before {
     top: 0;
     background-size: cover;
     filter: blur(1rem);
     z-index: 1;
-}
+    }
 
-/* 顶层背景 - 清晰显示主要背景内容 */
-#page-2::after {
+    /* 顶层背景 - 清晰显示主要背景内容 */
+    #page-2::after {
     top: 50%;
     transform: translateY(calc(-50% - 7.5rem));
     background-size: contain;
     z-index: 2;
-}
+    }
 
     /* 确保内容层在背景层之上 */
     #page-2 .content-wrapper {
