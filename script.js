@@ -583,11 +583,11 @@ async function loadMusicConfig() {
         // 返回默认配置
         return {
             playlist: [{
-                name: '长岛',
-                artist: '花粥',
-                url: 'https://music.163.com/song/media/outer/url?id=419373910.mp3',
-                cover: 'https://www.gequhai.com/static/img/logo.png',
-                lrcPath: './lyrics/长岛-花粥-歌词.lrc'
+                name: '无尽幸福',
+                artist: '凌晨一点的莱茵猫',
+                url: 'https://music.163.com/song/media/outer/url?id=2699754024.mp3',
+                cover: 'image/play.png',
+                lrcPath: './lyrics/无尽幸福-歌词.lrc'
             }],
             settings: {
                 autoplay: false,

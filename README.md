@@ -14,12 +14,14 @@ public\
 ├── libs\                           # 静态资源库
 │   └── *.min.js                    # 静态资源文件
 │   └── *.min.css                   # 静态资源文件
+├── image\                          # 图片资源目录
+│   └── *.png                       # 图片资源文件
+│   └── *.webp                      # 图片资源文件
+│   └── favicon.ico                 # 网站图标
 ├── CNAME                           # GitHub Pages 自定义域名配置文件
+├── LICENSE                         # 项目许可证文件
 ├── README.md                       # 项目说明文档
-├── article.html                    # 文章详情页面模板
-├── background-page-2.webp          # 第二页背景图片
-├── background.png                  # 主背景图片
-├── favicon.ico                     # 网站图标
+├── article.html                    # 文章详情页面文件
 ├── index.html                      # 主页面文件
 ├── script.js                       # 主要JavaScript功能文件
 └── styles.css                      # 主要样式文件

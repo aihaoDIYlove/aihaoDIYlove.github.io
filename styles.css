@@ -66,7 +66,7 @@ body {
    页面背景设置
    ======================================== */
 #page-1 {
-    background-image: url('/background.png');
+    background-image: url('image/background.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -74,7 +74,7 @@ body {
 }
 
 #page-2 {
-    background-image: url('/background-page-2.webp');
+    background-image: url('image/background-page-2.webp');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -893,7 +893,7 @@ body {
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/background-page-2.webp');
+        background-image: url('image/background-page-2.webp');
         background-position: center;
         background-repeat: no-repeat;
     }
