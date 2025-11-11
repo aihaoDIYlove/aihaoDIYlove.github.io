@@ -14,9 +14,10 @@ textarea,
     touch-action: manipulation;
 }
 
-.screenity-shadow-dom .TooltipContent, .screenity-shadow-dom .TooltipContent * {
-    -webkit-user-select: none !important;
-    user-select: none !important;
+.screenity-shadow-dom .TooltipContent,
+.screenity-shadow-dom .TooltipContent * {
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 /* ========================================
@@ -28,7 +29,8 @@ textarea,
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -64,19 +66,19 @@ html, body {
    页面背景设置
    ======================================== */
 #page-1 {
-    background-image: url('/background.png') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+    background-image: url('/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #page-2 {
-    background-image: url('/background-page-2.webp') !important;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
-    background-attachment: fixed !important;
+    background-image: url('/background-page-2.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 /* ========================================
@@ -102,17 +104,10 @@ html, body {
     overflow: hidden;
     z-index: 10;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    display: none; /* 默认隐藏文章列表 */
+    display: none;
     opacity: 0;
     transform: translateY(20px);
-    transition: all 0.3s ease;
-}
-
-/* 只在第一页显示文章列表 */
-#page-1.visible .article-list-container {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+    transition: all 0.2s ease;
 }
 
 .search-header {
@@ -132,7 +127,7 @@ html, body {
     color: #ffffff;
     font-size: 14px;
     outline: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .search-input::placeholder {
@@ -150,10 +145,11 @@ html, body {
     height: 20px;
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
-.search-icon:hover {
+.search-icon:hover,
+.search-icon:focus {
     color: #ffffff;
 }
 
@@ -165,14 +161,27 @@ html, body {
 .article-list {
     max-height: 320px;
     padding: 8px;
-    /* 添加平滑滚动效果 */
     overflow-y: auto;
     scroll-behavior: smooth;
+    -ms-overflow-style: none;
 }
 
-/* Chrome和Safari隐藏滚动条 */
 .article-list::-webkit-scrollbar {
-    display: none; 
+    display: none;
+}
+
+.article-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+}
+
+.article-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+}
+
+.article-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .article-item {
@@ -182,25 +191,15 @@ html, body {
     border-radius: 8px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    transition: all 0.3s ease;
-    /* 添加滚动动画效果 */
+    transition: all 0.2s ease;
     opacity: 0;
     transform: translateY(20px);
     animation: slideInUp 0.6s ease forwards;
 }
 
-/* 文章项延迟动画 - 为前三个文章项设置不同的延迟时间 */
 .article-item:nth-child(1) { animation-delay: 0.1s; }
 .article-item:nth-child(2) { animation-delay: 0.2s; }
-.article-item:nth-child(3) { animation-delay: 0.3s; }
-
-/* 滑入动画关键帧 - 从下方滑入并淡入显示 */
-@keyframes slideInUp {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+.article-item:nth-child(3) { animation-delay: 0.2s; }
 
 .article-item:hover {
     background: rgba(255, 255, 255, 0.1);
@@ -227,7 +226,7 @@ html, body {
     line-height: 1.4;
     display: -webkit-box;
     -webkit-line-clamp: 2;
-    line-clamp: 2; /* 标准属性，用于兼容性 */
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
@@ -237,23 +236,11 @@ html, body {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* 滚动条样式 */
-.article-list::-webkit-scrollbar {
-    width: 4px;
-}
-
-.article-list::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 2px;
-}
-
-.article-list::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 2px;
-}
-
-.article-list::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.5);
+/* 只在第一页显示文章列表 */
+#page-1.visible .article-list-container {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* ========================================
@@ -274,7 +261,6 @@ html, body {
     align-items: flex-end;
 }
 
-/* 对话框样式 */
 .dialog-box {
     background-color: rgba(26, 26, 26, 0.9);
     border: 2px solid #333;
@@ -289,7 +275,6 @@ html, body {
     backdrop-filter: blur(10px);
 }
 
-/* 对话框箭头 */
 .dialog-box::before {
     content: '';
     position: absolute;
@@ -303,7 +288,6 @@ html, body {
     border-bottom: 8px solid #333;
 }
 
-/* 打字机文本样式 */
 #typewriter-text {
     font-size: 18px;
     font-weight: 500;
@@ -314,7 +298,6 @@ html, body {
     vertical-align: bottom;
 }
 
-/* 光标样式 */
 .cursor {
     font-size: 18px;
     color: #ffffff;
@@ -323,13 +306,15 @@ html, body {
     vertical-align: bottom;
 }
 
-/* 光标闪烁动画 - 模拟打字机光标闪烁效果 */
 @keyframes blink {
-    0%, 50% {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+@keyframes slideInUp {
+    to {
         opacity: 1;
-    }
-    51%, 100% {
-        opacity: 0;
+        transform: translateY(0);
     }
 }
 
@@ -358,11 +343,10 @@ html, body {
     border-radius: 50%;
     color: #ffffff;
     text-decoration: none;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
-/* 社交媒体链接悬停效果 */
 .social-link:hover {
     background-color: #333;
     border-color: #555;
@@ -370,32 +354,24 @@ html, body {
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
 }
 
-/* 社交媒体图标尺寸 */
 .social-icon {
-    /* 图标尺寸 - 调整为与按钮尺寸匹配 */
     width: 26px;
     height: 26px;
     fill: currentColor;
 }
 
-/* GitHub图标特殊悬停样式 */
+/* 悬停效果 */
 #github-link:hover {
-    /* GitHub品牌色 - 浅灰色 #f0f6fc */
     color: #f0f6fc;
-    /* GitHub背景色 - 深灰色 #21262d */
     background-color: #21262d;
 }
 
-/* Bilibili图标特殊悬停样式 */
 #bilibili-link:hover {
-    /* Bilibili品牌色 - 蓝色 #00a1d6 */
     color: #00a1d6;
     background-color: #1a1a1a;
 }
 
-/* 知乎图标特殊悬停样式 */
 #zhihu-link:hover {
-    /* 知乎品牌色 - 蓝色 #0084ff */
     color: #0084ff;
     background-color: #1a1a1a;
 }
@@ -408,324 +384,27 @@ html, body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* 内容区域内边距 - 上下40px 左右20px */
     padding: 40px 20px;
 }
 
 .content-wrapper {
     text-align: center;
-    /* 内容最大宽度 - 800px */
     max-width: 800px;
 }
 
-/* 主标题样式 */
 .content-wrapper h1 {
-    /* 标题字体大小 - 3rem，可调整 */
     font-size: 3rem;
-    /* 标题下边距 - 20px */
     margin-bottom: 20px;
-    /* 渐变文字效果 - 白色到浅灰色45度渐变 */
     background: linear-gradient(45deg, #ffffff, #cccccc);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-/* 段落文字样式 */
 .content-wrapper p {
-    /* 段落字体大小 - 1.2rem，可调整 */
     font-size: 1.2rem;
-    /* 段落文字颜色 - 浅灰色 #cccccc */
     color: #cccccc;
-    /* 行高 - 1.6倍 */
     line-height: 1.6;
-}
-
-/* ========================================
-   响应式设计 - 移动端适配
-   ======================================== */
-@media (max-width: 540px) {
-    .header {
-        top: 1.25rem;
-        left: 1.25rem;
-    }
-    
-    .social-nav {
-        top: 1.25rem;
-        right: 1.25rem;
-        gap: 0.9375rem;
-    }
-    
-    .social-link {
-        width: 2.5rem;
-        height: 2.5rem;
-    }
-    
-    .social-icon {
-        width: 1.25rem;
-        height: 1.25rem;
-    }
-    
-    .dialog-box {
-        min-width: 10rem;
-        padding: 0.625rem 1rem;
-        margin-top: 0;
-    }
-    
-    #typewriter-text, .cursor {
-        font-size: 1rem;
-    }
-    
-    .content-wrapper h1 {
-        font-size: 2rem;
-    }
-    
-    .content-wrapper p {
-        font-size: 1rem;
-    }
-}
-
-/* ========================================
-   音乐播放器样式 - 半透明毛玻璃效果
-   ======================================== */
-.music-player {
-    position: fixed !important;
-    bottom: 0.75rem !important;
-    left: 0.75rem !important;
-    width: 11.25rem !important;
-    z-index: 10 !important;
-    background: rgba(0, 0, 0, 0.35) !important;
-    border-radius: 0.75rem !important;
-    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15) !important;
-    -webkit-backdrop-filter: blur(0.9375rem) !important;
-    backdrop-filter: blur(0.9375rem) !important;
-    border: 1px solid rgba(255, 255, 255, 0.3) !important;
-    display: none !important;
-    visibility: hidden !important;
-    opacity: 0 !important;
-    min-height: 3.75rem !important;
-    -webkit-transform: translateY(2.5rem) !important;
-    transform: translateY(2.5rem) !important;
-    -webkit-transition: all 0.3s ease-in-out !important;
-    transition: all 0.3s ease-in-out !important;
-    -webkit-appearance: none !important;
-    appearance: none !important;
-    will-change: transform, opacity !important;
-    -webkit-transform-style: preserve-3d !important;
-    transform-style: preserve-3d !important;
-}
-
-/* 播放器显示控制 - 只在第二页可见时显示，包含移动端兼容性处理 */
-#page-2.visible .music-player,
-#page-2.visible #aplayer {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    -webkit-transform: translateY(0) !important;
-    transform: translateY(0) !important;
-    z-index: 10 !important;
-    -webkit-appearance: initial !important;
-    appearance: initial !important;
-    pointer-events: auto !important;
-    -webkit-backface-visibility: visible !important;
-    backface-visibility: visible !important;
-    -webkit-transform-style: preserve-3d !important;
-    transform-style: preserve-3d !important;
-    overflow: visible !important;
-    -webkit-mask: none !important;
-    mask: none !important;
-    -webkit-transform: translateZ(0) translateY(0) !important;
-    transform: translateZ(0) translateY(0) !important;
-    contain: none !important;
-    isolation: auto !important;
-}
-
-#aplayer {
-    position: fixed !important;
-    bottom: 10px !important;
-    left: 10px !important;
-    width: 250px !important;
-    z-index: 10 !important;
-    background: rgba(0, 0, 0, 0.1) !important;
-    border-radius: 15px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-    -webkit-backdrop-filter: blur(1px) !important;
-    backdrop-filter: blur(1px) !important;
-    border: 2px solid rgba(255, 255, 255, 0.2) !important;
-    display: none !important;
-    min-height: 40px !important;
-    opacity: 0 !important;
-    -webkit-transform: translateY(20px) !important;
-    transform: translateY(20px) !important;
-    -webkit-transition: all 0.3s ease-in-out !important;
-    transition: all 0.3s ease-in-out !important;
-}
-
-/* ========================================
-   APlayer内部元素半透明样式定制
-   ======================================== */
-#aplayer .aplayer-info {
-    background: transparent !important;
-    border-bottom: none !important; 
-}
-
-#aplayer .aplayer-controller {
-    background: transparent !important;
-}
-
-#aplayer .aplayer-bar-wrap {
-    background: transparent !important;
-    border-radius: 3px !important;
-}
-
-#aplayer .aplayer-loaded {
-    background: rgba(255, 255, 255, 0.1) !important;
-}
-
-#aplayer .aplayer-played {
-    background: rgba(255, 255, 255, 0.7) !important;
-}
-
-#aplayer .aplayer-volume-bar {
-    background: rgba(255, 255, 255, 0.1) !important;
-}
-
-#aplayer .aplayer-volume-bar .aplayer-volume {
-    background: rgba(255, 255, 255, 0.8) !important;
-}
-
-#aplayer .aplayer-author {
-    color: #dea0a0 !important;
-}
-
-/* ========================================
-   APlayer播放列表样式定制
-   ======================================== */
-#aplayer .aplayer-list {
-    background: rgba(0, 0, 0, 0.3) !important;
-    border-radius: 10px !important;
-    -webkit-transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
-    -webkit-transform-origin: top !important;
-    transform-origin: top !important;
-    overflow: hidden !important;
-}
-
-#aplayer .aplayer-list:not(.aplayer-list-hide) {
-    -webkit-transform: scaleY(1) !important;
-    transform: scaleY(1) !important;
-    opacity: 1 !important;
-    max-height: 300px !important;
-}
-
-#aplayer .aplayer-list.aplayer-list-hide {
-    -webkit-transform: scaleY(0) !important;
-    transform: scaleY(0) !important;
-    opacity: 0 !important;
-    max-height: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-}
-
-#aplayer .aplayer-list ol li {
-    background: transparent !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
-    -webkit-transition: all 0.2s ease !important;
-    transition: all 0.2s ease !important;
-    opacity: 0.9 !important;
-}
-
-#aplayer .aplayer-list ol {
-    /* 去除因外部css导致的下部白色边框 */
-    overflow: hidden !important;
-}
-
-/* 播放列表中歌曲项悬停效果 */
-#aplayer .aplayer-list ol li:hover {
-    /* 悬停时背景变化 */
-    background: rgba(255, 255, 255, 0.05) !important;
-    /* 悬停时透明度变化 */
-    opacity: 1 !important;
-    /* 悬停时轻微缩放 */
-    -webkit-transform: scale(1.02) !important;
-    transform: scale(1.02) !important;
-}
-
-/* 播放列表中选中的歌曲项 */
-#aplayer .aplayer-list ol li.aplayer-list-light {
-    /* 选中歌曲背景 */
-    background: rgba(255, 144, 149, 0.3) !important;
-    /* 选中项的特殊动画效果 */
-    -webkit-transition: all 0.3s ease !important;
-    transition: all 0.3s ease !important;
-    /* 选中项的轻微发光效果 */
-    box-shadow: 0 0 10px rgba(255, 144, 149, 0.3) !important;
-    /* 选中项的缩放效果 */
-    -webkit-transform: scale(1.01) !important;
-    transform: scale(1.01) !important;
-}
-
-/* 播放列表中歌曲名称 */
-#aplayer .aplayer-list ol li .aplayer-list-title {
-    /* 歌曲名称颜色 */
-    color: #82ccf4 !important;
-}
-
-/* 播放列表中艺术家名称 */
-#aplayer .aplayer-list ol li .aplayer-list-author {
-    /* 艺术家名称颜色 */
-    color: rgba(255, 185, 185, 0.8) !important;
-}
-
-/* ========================================
-   响应式设计 - 音乐播放器适配
-   ======================================== */
-@media (max-width: 540px) {
-    /* 移动端第二页背景处理 - 双层背景设计优化小屏幕显示 */
-    #page-2 {
-    position: relative;
-    background: none !important;
-    }
-
-/* 背景双层处理 - 底层模糊背景 + 顶层清晰背景 */
-    #page-2::before, #page-2::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url('/background-page-2.webp');
-    background-position: center;
-    background-repeat: no-repeat;
-    }
-
-/* 底层背景 - 模糊效果作为背景氛围 */
-    #page-2::before {
-    top: 0;
-    background-size: cover;
-    filter: blur(1rem);
-    z-index: 1;
-    }
-
-    /* 顶层背景 - 清晰显示主要背景内容 */
-    #page-2::after {
-    top: 50%;
-    transform: translateY(calc(-50% - 7.5rem));
-    background-size: contain;
-    z-index: 2;
-    }
-
-    /* 确保内容层在背景层之上 */
-    #page-2 .content-wrapper {
-        position: relative;
-        z-index: 3;
-    }
-
-    /* 确保音乐播放器在背景层之上 */
-    #page-2 .music-player, #page-2 #aplayer {
-        position: fixed;
-        z-index: 4;
-    }
 }
 
 /* ========================================
@@ -748,15 +427,13 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     z-index: 10;
 }
 
 .floating-btn:hover {
     background: rgba(255, 255, 255, 0.2);
-    -webkit-transform: translateY(-2px);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
 }
@@ -781,27 +458,13 @@ html, body {
     padding: 8px;
     transform: translateX(100%);
     opacity: 0;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     z-index: 9;
 }
 
 .search-container.active {
     transform: translateX(0);
     opacity: 1;
-}
-
-.search-input {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #ffffff;
-    padding: 8px 15px;
-    width: 250px;
-    font-size: 14px;
-}
-
-.search-input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
 }
 
 .search-submit {
@@ -814,7 +477,7 @@ html, body {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
 }
 
 .search-submit:hover {
@@ -830,117 +493,52 @@ html, body {
 /* ========================================
    移动端文章列表控制按钮
    ======================================== */
+.mobile-expand-btn,
+.mobile-collapse-btn {
+    display: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
 .mobile-expand-btn {
-    display: none; /* 默认隐藏，只在移动端显示 */
     position: fixed;
     left: 0;
     top: 35%;
     width: 2.1875rem;
     height: 3.125rem;
-    background: rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-left: none;
     border-radius: 0 30px 30px 0;
-    color: #ffffff;
-    cursor: pointer;
     z-index: 11;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-    outline: none;
 }
 
-/* 移动端收起按钮 - 位于搜索框左侧 */
 .mobile-collapse-btn {
-    display: none;
-    background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.5);
     border-radius: 6px;
     width: 30px;
     height: 32px;
     color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
     margin-right: 8px;
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    outline: none;
     flex-shrink: 0;
 }
 
 .mobile-collapse-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    -webkit-transform: translateX(2px);
     transform: translateX(2px);
-
 }
 
-/* 移动端 */
-@media screen and (max-width: 540px) {
-    /* 只在第一页且页面激活时显示展开按钮 */
-    body.page-1-active #page-1.visible .mobile-expand-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* 显示移动端收起按钮 - 只在第一页显示 */
-    #page-1.visible .mobile-collapse-btn {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    /* 调整文章列表容器在移动端的样式 */
-    #page-1.visible .article-list-container {
-        left: 10px;
-        right: 10px;
-        width: auto;
-        max-width: none;
-        bottom: 10px;
-        max-height: 70vh; /* 限制最大高度，避免占据过多空间 */
-        -webkit-transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
-        transform: translateX(-100%) !important; /* 默认隐藏在左侧 */
-        opacity: 0 !important;
-        -webkit-transition: all 0.2s ease;
-        transition: all 0.3s ease;
-    }
-    
-    /* 展开状态的文章列表 - 使用更高优先级的选择器 */
-    #page-1.visible .article-list-container.expanded {
-        -webkit-transform: translateX(0) !important;
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-    }
-    
-    /* 隐藏展开按钮当文章列表展开时 */
-    #page-1.visible .article-list-container.expanded ~ .mobile-expand-btn {
-        opacity: 0 !important;
-        pointer-events: none !important;
-        visibility: hidden !important;
-        -webkit-transform: translateX(-20px) !important;
-        transform: translateX(-20px) !important;
-        -webkit-transition: all 0.3s ease !important;
-        transition: all 0.3s ease !important;
-    }
-    
-    .mobile-expand-btn svg {
-        width: 1.125rem;
-        height: 1.125rem;
-    }
-
+.mobile-expand-btn svg {
+    width: 1.125rem;
+    height: 1.125rem;
 }
 
 /* ========================================
    星星显示样式
    ======================================== */
-
-/* 星星闪烁效果 - 为页面添加动态背景装饰 */
 .stars-container {
     position: absolute;
     top: 0;
@@ -959,7 +557,6 @@ html, body {
     animation: twinkle var(--duration) infinite;
 }
 
-/* 星星闪烁动画 - 模拟星星闪烁效果 */
 @keyframes twinkle {
     0%, 100% {
         opacity: 0;
@@ -972,10 +569,163 @@ html, body {
 }
 
 /* ========================================
+   音乐播放器样式
+   ======================================== */
+.music-player,
+#aplayer {
+    position: fixed !important;
+    z-index: 10 !important;
+    background: rgba(0, 0, 0, 0.35) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    display: none !important;
+    opacity: 0 !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.music-player {
+    bottom: 0.75rem !important;
+    left: 0.75rem !important;
+    width: 11.25rem !important;
+    border-radius: 0.75rem !important;
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15) !important;
+    min-height: 3.75rem !important;
+    transform: translateY(2.5rem) !important;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    will-change: transform, opacity !important;
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
+}
+
+#aplayer {
+    bottom: 10px !important;
+    left: 10px !important;
+    width: 250px !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+    -webkit-backdrop-filter: blur(1px) !important;
+    backdrop-filter: blur(1px) !important;
+    min-height: 40px !important;
+    transform: translateY(20px) !important;
+}
+
+/* 播放器显示控制 */
+#page-2.visible .music-player,
+#page-2.visible #aplayer {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+    -webkit-appearance: initial !important;
+    appearance: initial !important;
+    pointer-events: auto !important;
+    -webkit-backface-visibility: visible !important;
+    backface-visibility: visible !important;
+    -webkit-transform-style: preserve-3d !important;
+    transform-style: preserve-3d !important;
+    overflow: visible !important;
+    -webkit-mask: none !important;
+    mask: none !important;
+    contain: none !important;
+    isolation: auto !important;
+}
+
+/* APlayer内部元素样式 */
+#aplayer .aplayer-info,
+#aplayer .aplayer-controller,
+#aplayer .aplayer-bar-wrap {
+    background: transparent !important;
+}
+
+#aplayer .aplayer-info {
+    border-bottom: none !important; 
+}
+
+#aplayer .aplayer-bar-wrap {
+    border-radius: 3px !important;
+}
+
+#aplayer .aplayer-loaded {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#aplayer .aplayer-played {
+    background: rgba(255, 255, 255, 0.7) !important;
+}
+
+#aplayer .aplayer-volume-bar {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#aplayer .aplayer-volume-bar .aplayer-volume {
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+#aplayer .aplayer-author {
+    color: #dea0a0 !important;
+}
+
+/* APlayer播放列表样式 */
+#aplayer .aplayer-list {
+    background: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 10px !important;
+    transition: all 0.2s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+    -webkit-transform-origin: top !important;
+    transform-origin: top !important;
+    overflow: hidden !important;
+}
+
+#aplayer .aplayer-list:not(.aplayer-list-hide) {
+    transform: scaleY(1) !important;
+    opacity: 1 !important;
+    max-height: 300px !important;
+}
+
+#aplayer .aplayer-list.aplayer-list-hide {
+    transform: scaleY(0) !important;
+    opacity: 0 !important;
+    max-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#aplayer .aplayer-list ol {
+    overflow: hidden !important;
+}
+
+#aplayer .aplayer-list ol li {
+    background: transparent !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    transition: all 0.2s ease !important;
+    opacity: 0.9 !important;
+}
+
+#aplayer .aplayer-list ol li:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    opacity: 1 !important;
+    transform: scale(1.02) !important;
+}
+
+#aplayer .aplayer-list ol li.aplayer-list-light {
+    background: rgba(255, 144, 149, 0.3) !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 0 10px rgba(255, 144, 149, 0.3) !important;
+    transform: scale(1.01) !important;
+}
+
+#aplayer .aplayer-list ol li .aplayer-list-title {
+    color: #82ccf4 !important;
+}
+
+#aplayer .aplayer-list ol li .aplayer-list-author {
+    color: rgba(255, 185, 185, 0.8) !important;
+}
+
+/* ========================================
    歌词显示样式
    ======================================== */
-
-/* 歌词显示容器 - 移动端歌词显示区域 */
 .mobile-lyrics-container {
     display: block;
     position: absolute;
@@ -987,14 +737,6 @@ html, body {
     z-index: 5;
     pointer-events: none;
     overflow: hidden;
-}
-
-/* 桌面端歌词容器优化 - 调整宽度和位置 */
-@media screen and (min-width: 541px) {
-    .mobile-lyrics-container {
-        width: 80%;
-        top: calc(65% - 100px);
-    }
 }
 
 .mobile-lyrics-content {
@@ -1031,40 +773,17 @@ html, body {
     will-change: transform, opacity;
 }
 
-/* 歌词过渡动画状态 */
 .mobile-lyric-line.lyric-transitioning {
-    -webkit-transition: -webkit-transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                       opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
                opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    /* 确保动画期间不受其他动画影响 */
     will-change: transform, opacity;
-    isolation: isolate; /* 创建新的层叠上下文 */
-}
-
-/* 桌面端歌词行样式优化 */
-@media screen and (min-width: 541px) {
-    .mobile-lyric-line {
-        font-size: 18px;
-        line-height: 2.0;
-        margin: 10px 0;
-    }
-    
-    .mobile-lyric-line.mobile-current {
-        font-size: 22px;
-        margin: 15px 0;
-    }
-    
-    .mobile-lyric-line.mobile-next {
-        font-size: 17px;
-    }
+    isolation: isolate;
 }
 
 .mobile-lyric-line.mobile-current {
     opacity: 1;
     font-size: 18px;
     font-weight: 600;
-    -webkit-transform: scale(1.1);
     transform: scale(1.1);
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
     color: #ffffff;
@@ -1079,7 +798,175 @@ html, body {
     color: #cccccc;
 }
 
-/* 移动端样式 */
+/* ========================================
+   响应式设计
+   ======================================== */
+@media screen and (max-width: 540px) {
+    /* 基础布局调整 */
+    .header {
+        top: 1.25rem;
+        left: 1.25rem;
+    }
+    
+    .social-nav {
+        top: 1.25rem;
+        right: 1.25rem;
+        gap: 0.9375rem;
+    }
+    
+    .social-link {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+    
+    .social-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+    
+    .dialog-box {
+        min-width: 10rem;
+        padding: 0.625rem 1rem;
+        margin-top: 0;
+    }
+    
+    #typewriter-text,
+    .cursor {
+        font-size: 1rem;
+    }
+    
+    .content-wrapper h1 {
+        font-size: 2rem;
+    }
+    
+    .content-wrapper p {
+        font-size: 1rem;
+    }
+    
+    /* 移动端按钮显示控制 */
+    body.page-1-active #page-1.visible .mobile-expand-btn,
+    #page-1.visible .mobile-collapse-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        visibility: visible;
+        transition: all 0.2s ease;
+    }
+    
+    /* 移动端文章列表样式 */
+    #page-1.visible .article-list-container {
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: none;
+        bottom: 10px;
+        max-height: 70vh;
+        transform: translateX(-100%) !important;
+        opacity: 0 !important;
+        transition: all 0.2s ease;
+    }
+    
+    #page-1.visible .article-list-container.expanded {
+        transform: translateX(0) !important;
+        opacity: 1 !important;
+    }
+    
+    #page-1.visible .article-list-container.expanded ~ .mobile-expand-btn {
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+        transform: translateX(-20px) !important;
+        transition: all 0.2s ease;
+    }
+    
+    /* 移动端第二页背景处理 */
+    #page-2 {
+        position: relative;
+        background: none !important;
+    }
+    
+    #page-2::before,
+    #page-2::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('/background-page-2.webp');
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    
+    #page-2::before {
+        top: 0;
+        background-size: cover;
+        filter: blur(1rem);
+        z-index: 1;
+    }
+    
+    #page-2::after {
+        top: 50%;
+        transform: translateY(calc(-50% - 7.5rem));
+        background-size: contain;
+        z-index: 2;
+    }
+    
+    #page-2 .content-wrapper {
+        position: relative;
+        z-index: 3;
+    }
+    
+    #page-2 .music-player,
+    #page-2 #aplayer {
+        position: fixed;
+        z-index: 4;
+    }
+    
+    /* 移动端歌词样式 */
+    .mobile-lyrics-container {
+        width: 90%;
+        top: calc(70% - 100px);
+    }
+    
+    .mobile-lyric-line {
+        font-size: 16px;
+        line-height: 1.8;
+        margin: 8px 0;
+    }
+}
+
+@media screen and (min-width: 541px) {
+    /* 桌面端歌词容器优化 */
+    .mobile-lyrics-container {
+        width: 80%;
+        top: calc(65% - 100px);
+    }
+    
+    .mobile-lyric-line {
+        font-size: 18px;
+        line-height: 2.0;
+        margin: 10px 0;
+    }
+    
+    .mobile-lyric-line.mobile-current {
+        font-size: 22px;
+        margin: 15px 0;
+    }
+    
+    .mobile-lyric-line.mobile-next {
+        font-size: 17px;
+    }
+    
+    .desktop-only {
+        display: block;
+    }
+    
+    .mobile-only {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 540px) {
     .desktop-only {
         display: none;
@@ -1087,11 +974,5 @@ html, body {
     
     .mobile-only {
         display: block;
-    }
-    
-    /* 移动端歌词容器样式 */
-    .mobile-lyrics-container {
-        width: 90%;
-        top: calc(70% - 100px);
     }
 }
