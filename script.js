@@ -960,13 +960,9 @@ function initMobileArticleListControl() {
         return; // 如果元素不存在则退出
     }
     
-    // 展开按钮点击事件 - 使用CSS类控制动画
-    expandBtn.addEventListener('click', function(event) {
-        event.preventDefault();
-        event.stopPropagation();
-        
-        console.log('展开按钮被点击');
-        console.log('当前文章列表状态:', articleListContainer.classList.contains('expanded'));
+    // 展开按钮动画相关
+    function handleExpand() {
+        console.log('展开按钮被触发');
         
         // 强制触发重排以确保Chrome正确渲染
         articleListContainer.offsetHeight;
@@ -974,9 +970,6 @@ function initMobileArticleListControl() {
         // 添加expanded类
         articleListContainer.classList.add('expanded');
         
-        // 验证类是否添加成功
-        console.log('添加expanded类后:', articleListContainer.classList.contains('expanded'));
-        
         // 强制重绘
         articleListContainer.style.transform = 'translateX(0)';
         articleListContainer.style.opacity = '1';
@@ -986,30 +979,20 @@ function initMobileArticleListControl() {
         
         // 使用CSS类控制收起按钮伸出动画
         collapseBtn.classList.add('showing');
+    }
+    
+    // 展开按钮点击事件 - 使用CSS类控制动画
+    expandBtn.addEventListener('click', function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        handleExpand();
     });
     
     // 添加触摸事件支持
     expandBtn.addEventListener('touchstart', function(event) {
         event.preventDefault();
         event.stopPropagation();
-        
-        console.log('展开按钮触摸开始');
-        
-        // 强制触发重排
-        articleListContainer.offsetHeight;
-        
-        // 添加expanded类
-        articleListContainer.classList.add('expanded');
-        
-        // 强制重绘
-        articleListContainer.style.transform = 'translateX(0)';
-        articleListContainer.style.opacity = '1';
-        
-        // 使用CSS类控制展开按钮缩入动画
-        expandBtn.classList.add('hiding');
-        
-        // 使用CSS类控制收起按钮伸出动画
-        collapseBtn.classList.add('showing');
+        handleExpand();
     }, { passive: false });
     
     // 收起按钮点击事件
