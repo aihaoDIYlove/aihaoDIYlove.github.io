@@ -18,6 +18,8 @@ public\
 │   └── *.png                       # 图片资源文件
 │   └── *.webp                      # 图片资源文件
 │   └── favicon.ico                 # 网站图标
+├── css\                            # 样式文件目录
+│   └── *.css                       # 分块重构的样式文件
 ├── CNAME                           # GitHub Pages 自定义域名配置文件
 ├── LICENSE                         # 项目许可证文件
 ├── README.md                       # 项目说明文档
@@ -58,3 +60,7 @@ public\
 - **katex.min.css**：数学公式渲染样式
 - **katex.min.js**：数学公式渲染库
 - **auto-render.min.js**：自动渲染数学公式库
+
+待办事件：
+
+- 1.重构script.js文件，将其功能分块，每个功能模块对应一个函数，提高代码可读性和维护性。
