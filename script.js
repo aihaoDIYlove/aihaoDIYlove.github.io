@@ -680,7 +680,7 @@ async function initMusicPlayer() {
                         }
                     }
                 }
-            }, 100);
+            }, 300);
             
             // 播放器事件监听 - 用于调试和状态跟踪
             window.aplayer.on('loadstart', () => {
