@@ -1,0 +1,87 @@
+/* ========================================
+   歌词显示样式
+   ======================================== */
+.mobile-lyrics-container {
+    display: block;
+    position: absolute;
+    top: calc(70% - 100px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: auto;
+    z-index: 3;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.mobile-lyrics-content {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.mobile-lyrics-content::-webkit-scrollbar {
+    display: none;
+}
+
+.mobile-lyric-line {
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    line-height: 2.4;
+    margin: 8px 0;
+    opacity: 0.5;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    word-wrap: break-word;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-shrink: 0;
+    transform: translateY(0);
+    will-change: transform, opacity;
+}
+
+.mobile-lyric-line.lyric-transitioning {
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+               opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    isolation: isolate;
+}
+
+.mobile-lyric-line.mobile-current {
+    opacity: 1;
+    font-size: 18px;
+    font-weight: 600;
+    transform: scale(1.1);
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    margin: 12px 0;
+    white-space: normal;
+    text-overflow: unset;
+}
+
+.mobile-lyric-line.mobile-next {
+    opacity: 0.7;
+    font-size: 15px;
+    color: #cccccc;
+}
+
+@media screen and (max-width: 540px) {
+    #page-2.visible .mobile-lyrics-container {
+        width: 90%;
+        top: calc(55% - 100px);
+    }
+    
+    #page-2.visible .mobile-lyric-line {
+        font-size: 15px;
+        line-height: 2;
+        margin: 8px 0;
+    }
+}

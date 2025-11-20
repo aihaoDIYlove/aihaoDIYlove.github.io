@@ -1,0 +1,84 @@
+.music-player {
+    bottom: 25px;
+    left: 20px;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    width: 240px;
+    z-index: 4;
+}
+
+.aplayer-info {
+    border: none !important;
+}
+
+.aplayer-author,
+.aplayer-list-author {
+    color: #dea0a0 !important;
+}
+
+.aplayer-list-title {
+    color: #82ccf4 !important;
+}
+
+.aplayer-list ol {
+    overflow: hidden !important;
+    transition: max-height 0.2s ease !important;
+}
+
+.aplayer-list:not(.aplayer-list-hide) {
+    transform: scaleY(1);
+    max-height: 300px;
+}
+
+.aplayer-list.aplayer-list-hide {
+    transform: scaleY(0);
+}
+
+.aplayer-list-light {
+    background: rgba(255, 144, 149, 0.3) !important;
+    transition: all 0.2s ease !important;
+    box-shadow: 0 0 10px rgba(255, 144, 149, 0.3) !important;
+    transform: scale(1.01) !important;
+}
+.aplayer-list ol li:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+    transform: scale(1.02) !important;
+}
+
+/* 播放进度条 */
+
+#aplayer .aplayer-loaded {
+    background: rgba(55, 0, 255, 0.6) !important;
+}
+
+#aplayer .aplayer-played {
+    background: rgba(253, 189, 189, 0.8) !important;
+}
+/* 音量条 */
+#aplayer .aplayer-volume-bar {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+#aplayer .aplayer-volume-bar .aplayer-volume {
+    background: rgba(255, 255, 255, 0.8) !important;
+}
+
+.music-player,
+#aplayer {
+    position: fixed !important;
+    display: none !important;
+}
+
+#page-2.visible .music-player,
+#page-2.visible #aplayer {
+    display: block !important;
+}
+
+@media screen and (max-width: 540px) {
+    .music-player {
+        bottom: 10px;
+        left: 5px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+}

@@ -109,7 +109,7 @@ async function preloadAllLyrics() {
     
     console.log('开始预加载歌词文件...');
     
-    // 智能预加载策略：优先预加载前几首歌曲的歌词
+    // 优先预加载前几首歌曲的歌词
     const playlist = musicConfig.playlist;
     const preloadCount = Math.min(5, playlist.length); // 预加载前5首或更少
     
@@ -630,26 +630,6 @@ async function initMusicPlayer() {
         console.log('APlayer库和容器都已准备就绪');
         
         try {
-            // 强制显示容器，确保Chrome能正确渲染
-            container.style.display = 'block';
-            container.style.visibility = 'visible';
-            container.style.opacity = '1';
-            container.style.position = 'fixed';
-            container.style.zIndex = '1000';
-            container.style.bottom = '10px';
-            container.style.left = '10px';
-            
-            // 强制重绘触发
-            container.offsetHeight;
-            
-            // 添加调试信息
-            console.log('容器样式已设置:', {
-                display: container.style.display,
-                visibility: container.style.visibility,
-                opacity: container.style.opacity,
-                position: container.style.position
-            });
-
             // 转换配置文件格式为APlayer需要的格式
             const audioList = config.playlist.map(song => ({
                 name: song.name,
@@ -658,13 +638,11 @@ async function initMusicPlayer() {
                 cover: song.cover === 'default' ? config.defaultCover : song.cover,
                 lrc: song.lrcPath // APlayer会自动加载LRC文件
             }));
-
             // 设置当前歌词路径（用于第一首歌）
             if (config.playlist.length > 0) {
                 currentLyricPath = config.playlist[0].lrcPath;
                 console.log('设置初始歌词路径:', currentLyricPath);
             }
-
             window.aplayer = new APlayer({
                 container: container, // 播放器容器
                 mini: config.settings.mini, // 是否为迷你模式
@@ -680,7 +658,6 @@ async function initMusicPlayer() {
                 // 音频文件配置 - 从配置文件加载
                 audio: audioList
             });
-            
             // 强制触发重绘
             container.offsetHeight;
             
@@ -770,26 +747,24 @@ async function initMusicPlayer() {
 /* ========================================
    页面滚动监听和播放器控制
    ======================================== */
-// 设置滚动监听 - 使用Intersection Observer API监听页面滚动
 function setupScrollListener() {
-    // 创建交叉观察器 - 监听元素是否进入视口
+    //监听元素是否进入视口
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
-            // 检查是否为第一页元素（文章列表页面）
+            // 检查是否为第一页元素
             if (entry.target.id === 'page-1') {
                 const page1 = entry.target;
                 
-                // 当第一页进入视口时（用户在第一页）
+                // 当第一页进入视口时
                 if (entry.isIntersecting) {
                     console.log('用户在第一页');
                     // 添加visible类来显示文章列表
                     page1.classList.add('visible');
                 } else {
-                    // 当第一页离开视口时（用户离开第一页）
+                    // 当第一页离开视口时
                     console.log('已离开第一页');
                     // 移除visible类来隐藏文章列表
                     page1.classList.remove('visible');
-                    
                     // 自动收起文章列表 
                     const articleListContainer = document.querySelector('.article-list-container');
                     if (articleListContainer && articleListContainer.classList.contains('expanded')) {
@@ -800,22 +775,18 @@ function setupScrollListener() {
                     }
                 }
             }
-            
             // 检查是否为第二页元素（音乐播放器页面）
             if (entry.target.id === 'page-2') {
                 const page2 = entry.target;
-                
                 // 当第二页进入视口时（用户滚动到第二页）
                 if (entry.isIntersecting) {
                     console.log('用户滚动到第二页');
                     // 添加visible类来显示播放器 - 配合CSS控制显示/隐藏
                     page2.classList.add('visible');
-                    
                     // 显示歌词容器
                     if (lyricsDisplay) {
                         lyricsDisplay.setVisible(true);
                     }
-                    
                     // 如果播放器已初始化，尝试播放音乐
                     if (window.aplayer) {
                         // 尝试播放（可能会被浏览器的自动播放策略阻止）
@@ -832,12 +803,10 @@ function setupScrollListener() {
                     console.log('用户离开第二页');
                     // 移除visible类来隐藏播放器
                     page2.classList.remove('visible');
-                    
                     // 隐藏歌词容器
                     if (lyricsDisplay) {
                         lyricsDisplay.setVisible(false);
                     }
-                    
                     // 如果播放器已初始化，暂停播放
                     if (window.aplayer) {
                         window.aplayer.pause(); // 暂停播放
@@ -847,7 +816,7 @@ function setupScrollListener() {
         });
     }, {
         // 观察器配置
-        threshold: 0.8, // 当80%的元素进入视口时触发
+        threshold: 0.8, // 当98%的元素进入视口时触发
     });
 
     // 开始观察第一页和第二页元素
@@ -982,8 +951,6 @@ function escapeHtml(text) {
 /* ========================================
    移动端文章列表控制功能
    ======================================== */
-
-// 初始化移动端文章列表控制
 function initMobileArticleListControl() {
     const expandBtn = document.querySelector('.mobile-expand-btn');
     const collapseBtn = document.querySelector('.mobile-collapse-btn');
@@ -993,7 +960,7 @@ function initMobileArticleListControl() {
         return; // 如果元素不存在则退出
     }
     
-    // 展开按钮点击事件 - 增强Chrome移动端兼容性
+    // 展开按钮点击事件 - 使用CSS类控制动画
     expandBtn.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -1014,15 +981,14 @@ function initMobileArticleListControl() {
         articleListContainer.style.transform = 'translateX(0)';
         articleListContainer.style.opacity = '1';
         
-        // 添加一个小延迟确保动画效果
-        setTimeout(() => {
-            expandBtn.style.opacity = '0';
-            expandBtn.style.pointerEvents = 'none';
-            expandBtn.style.visibility = 'hidden';
-        }, 100);
+        // 使用CSS类控制展开按钮缩入动画
+        expandBtn.classList.add('hiding');
+        
+        // 使用CSS类控制收起按钮伸出动画
+        collapseBtn.classList.add('showing');
     });
     
-    // 添加触摸事件支持（Chrome移动端）
+    // 添加触摸事件支持
     expandBtn.addEventListener('touchstart', function(event) {
         event.preventDefault();
         event.stopPropagation();
@@ -1039,11 +1005,11 @@ function initMobileArticleListControl() {
         articleListContainer.style.transform = 'translateX(0)';
         articleListContainer.style.opacity = '1';
         
-        setTimeout(() => {
-            expandBtn.style.opacity = '0';
-            expandBtn.style.pointerEvents = 'none';
-            expandBtn.style.visibility = 'hidden';
-        }, 100);
+        // 使用CSS类控制展开按钮缩入动画
+        expandBtn.classList.add('hiding');
+        
+        // 使用CSS类控制收起按钮伸出动画
+        collapseBtn.classList.add('showing');
     }, { passive: false });
     
     // 收起按钮点击事件
@@ -1054,12 +1020,12 @@ function initMobileArticleListControl() {
         console.log('收起按钮被点击');
         
         articleListContainer.classList.remove('expanded');
-        // 恢复展开按钮的显示
-        setTimeout(() => {
-            expandBtn.style.opacity = '1';
-            expandBtn.style.pointerEvents = 'auto';
-            expandBtn.style.visibility = 'visible';
-        }, 300); // 等待收起动画完成
+        
+        // 使用CSS类控制收起按钮缩回动画
+        collapseBtn.classList.remove('showing');
+        
+        // 使用CSS类控制展开按钮伸出动画
+        expandBtn.classList.remove('hiding');
     });
     
     // 添加触摸事件支持
@@ -1071,11 +1037,11 @@ function initMobileArticleListControl() {
         
         articleListContainer.classList.remove('expanded');
         
-        setTimeout(() => {
-            expandBtn.style.opacity = '1';
-            expandBtn.style.pointerEvents = 'auto';
-            expandBtn.style.visibility = 'visible';
-        }, 300);
+        // 使用CSS类控制收起按钮缩回动画
+        collapseBtn.classList.remove('showing');
+        
+        // 使用CSS类控制展开按钮伸出动画
+        expandBtn.classList.remove('hiding');
     });
     
     // 点击文章列表外部区域收起（仅在移动端）
@@ -1098,11 +1064,10 @@ function initMobileArticleListControl() {
     // 监听窗口大小变化，处理桌面端/移动端切换
     window.addEventListener('resize', function() {
         if (window.innerWidth > 540) {
-            // 桌面端：移除展开状态，恢复展开按钮
+            // 桌面端：移除展开状态，恢复按钮状态
             articleListContainer.classList.remove('expanded');
-            expandBtn.style.opacity = '1';
-            expandBtn.style.pointerEvents = 'auto';
-            expandBtn.style.visibility = 'visible';
+            expandBtn.classList.remove('hiding');
+            collapseBtn.classList.remove('showing');
         }
     });
 }
