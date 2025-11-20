@@ -57,7 +57,7 @@
 
 .mobile-lyric-line.mobile-current {
     opacity: 1;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
     transform: scale(1.1);
     text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.9);
@@ -79,9 +79,13 @@
         top: calc(55% - 100px);
     }
     
-    #page-2.visible .mobile-lyric-line {
-        font-size: 15px;
-        line-height: 2;
+    #page-2.visible .mobile-lyric-line,
+    .mobile-next {
+        font-size: 14px;
+        line-height: 2.4;
         margin: 8px 0;
+    }
+    #page-2.visible .mobile-current {
+        font-size: 17px;
     }
 }

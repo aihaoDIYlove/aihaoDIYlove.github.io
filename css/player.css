@@ -50,6 +50,11 @@
     transform: scale(1.02) !important;
 }
 
+.aplayer-icon-menu svg path {
+    fill: #e73760 !important;
+    stroke: #31b1e8 !important;
+}
+
 /* 播放进度条 */
 
 #aplayer .aplayer-loaded {

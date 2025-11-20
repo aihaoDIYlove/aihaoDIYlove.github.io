@@ -184,7 +184,7 @@
     }
     
     /* 展开按钮 */
-    .mobile-expand-btn {
+    #page-1.visible .mobile-expand-btn {
         position: fixed;
         left: 0;
         top: 35%;
@@ -198,14 +198,14 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 100;
     }
-    .mobile-expand-btn svg {
+    #page-1.visible .mobile-expand-btn svg {
         width: 1.125rem;
         height: 1.125rem;
         transition: transform 0.3s ease;
     }
 
     /* 收起按钮 */
-    .mobile-collapse-btn {
+    #page-1.visible .mobile-collapse-btn {
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 6px;
         width: 30px;
@@ -215,20 +215,20 @@
         flex-shrink: 0;
         z-index: 100;
     }
-    .mobile-collapse-btn svg {
+    #page-1.visible .mobile-collapse-btn svg {
         width: 1.125rem;
         height: 1.125rem;
     }
     
     /* 展开按钮缩入动画 */
-    .mobile-expand-btn.hiding {
+    #page-1.visible .mobile-expand-btn.hiding {
         transform: translateX(-35px);
         opacity: 0;
         pointer-events: none;
     }
     
     /* 收起按钮显示动画 */
-    .mobile-collapse-btn.showing {
+    #page-1.visible .mobile-collapse-btn.showing {
         opacity: 1;
         visibility: visible;
     }
