@@ -49,11 +49,11 @@
 /* 播放进度条 */
 
 #aplayer .aplayer-loaded {
-    background: rgba(55, 0, 255, 0.6) !important;
+    background: rgba(55, 0, 255, 0.3) !important;
 }
 
 #aplayer .aplayer-played {
-    background: rgba(253, 189, 189, 0.8) !important;
+    background: rgba(253, 189, 189, 1) !important;
 }
 /* 音量条 */
 #aplayer .aplayer-volume-bar {
