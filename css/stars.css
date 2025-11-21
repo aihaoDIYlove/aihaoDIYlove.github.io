@@ -13,10 +13,23 @@
 
 .star {
     position: absolute;
-    background: white;
-    border-radius: 50%;
     opacity: 0;
     animation: twinkle var(--duration) infinite;
+    color-scheme: light;
+    isolation: isolate;
+    background: none;
+    border-radius: 0;
+}
+
+.star svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.star path {
+    fill: white;
+    color: white;
 }
 
 @keyframes twinkle {
