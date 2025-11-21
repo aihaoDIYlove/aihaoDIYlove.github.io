@@ -26,7 +26,6 @@ public\
 ├── article.html                    # 文章详情页面文件
 ├── index.html                      # 主页面文件
 ├── script.js                       # 主要JavaScript功能文件
-└── styles.css                      # 主要样式文件
 ```
 
 ## 博客功能
