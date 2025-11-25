@@ -161,7 +161,7 @@ async function preloadAllLyrics() {
 const socialLinks = {
     github: 'https://github.com/aihaoDIYlove', // GitHub链接
     bilibili: 'https://space.bilibili.com/62784664', // Bilibili链接
-    zhihu: 'https://www.zhihu.com/people/ai-hao-diylove' // 知乎链接
+    mbti: 'https://mbti.dreamripples.icu/' // mbti选择器链接
 };
 
 /* ========================================
@@ -193,11 +193,11 @@ document.addEventListener('DOMContentLoaded', function() {
         bilibiliLink.rel = 'noopener noreferrer'; // 安全属性
     }
 
-    const zhihuLink = document.querySelector('#zhihu-link');
-    if (zhihuLink) {
-        zhihuLink.href = socialLinks.zhihu;
-        zhihuLink.target = '_blank'; // 新窗口打开
-        zhihuLink.rel = 'noopener noreferrer'; // 安全属性
+    const mbtiLink = document.querySelector('#mbti-link');
+    if (mbtiLink) {
+        mbtiLink.href = socialLinks.mbti;
+        mbtiLink.target = '_blank'; // 新窗口打开
+        mbtiLink.rel = 'noopener noreferrer'; // 安全属性
     }
 
     // 初始化文章列表
