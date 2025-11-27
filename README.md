@@ -20,12 +20,13 @@ public\
 │   └── favicon.ico                 # 网站图标
 ├── css\                            # 样式文件目录
 │   └── *.css                       # 分块重构的样式文件
+├── js\                             # js文件目录
+│   └── *.js                        # 分块重构的js文件
 ├── CNAME                           # GitHub Pages 自定义域名配置文件
 ├── LICENSE                         # 项目许可证文件
 ├── README.md                       # 项目说明文档
 ├── article.html                    # 文章详情页面文件
 ├── index.html                      # 主页面文件
-├── script.js                       # 主要JavaScript功能文件
 ```
 
 ## 博客功能
@@ -62,4 +63,5 @@ public\
 
 待办事件：
 
-- 1.重构script.js文件，将其功能分块，每个功能模块对应一个函数，提高代码可读性和维护性。
+- 1.优化js文件逻辑
+- 2.添加新的展开式悬浮窗，用来安置新的功能模块
