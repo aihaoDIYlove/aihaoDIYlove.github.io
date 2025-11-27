@@ -33,14 +33,14 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
     // 随机延迟开始时间
     const delay = Math.random() * duration;
 
-    // 创建SVG星星 - 国产浏览器不会强制替换SVG颜色
+    // 创建SVG星星 - 防止国产浏览器强制替换星星颜色
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('width', '100%');
     svg.setAttribute('height', '100%');
     svg.setAttribute('viewBox', '0 0 100 100');
     svg.style.display = 'block';
 
-    // 创建星星形状 - 使用纯白色
+    // 创建星星形状
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', 'M50,0 L61,35 L98,35 L68,57 L79,91 L50,70 L21,91 L32,57 L2,35 L39,35 Z');
     path.setAttribute('fill', '#FFFFFF');
