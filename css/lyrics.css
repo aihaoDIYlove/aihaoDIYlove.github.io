@@ -4,7 +4,7 @@
 .mobile-lyrics-container {
     display: block;
     position: absolute;
-    top: calc(70% - 100px);
+    top: calc(60% - 100px);
     left: 50%;
     transform: translateX(-50%);
     width: 90%;
