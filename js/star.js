@@ -51,6 +51,3 @@ function createStar(container, minSize, maxSize, minDuration, maxDuration) {
 
     container.appendChild(star);
 }
-
-// 导出函数到全局作用域
-window.initStarsEffect = initStarsEffect;
