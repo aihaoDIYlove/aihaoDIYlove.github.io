@@ -12,11 +12,19 @@
     <!-- 深色模式 -->
     <meta name="color-scheme" content="dark">
     <!-- 样式表 -->
-    <link rel="stylesheet" href="css/main.css?v=a635a070">
+    <!-- 关键CSS  -->
+    <link rel="stylesheet" href="css/main.css?v=da0dd6b4">
     <link rel="stylesheet" href="css/articleList.css?v=06f6c8f5">
-    <link rel="stylesheet" href="css/lyrics.css?v=73b4f456">
-    <link rel="stylesheet" href="css/player.css?v=47fa475e">
-    <link rel="stylesheet" href="css/stars.css?v=c520baab">
+    
+    <!-- 非关键CSS - 异步加载 -->
+    <link rel="preload" href="css/lyrics.css?v=903b028d" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/lyrics.css?v=903b028d"></noscript>
+    
+    <link rel="preload" href="css/player.css?v=47fa475e" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/player.css?v=47fa475e"></noscript>
+    
+    <link rel="preload" href="css/stars.css?v=c520baab" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="css/stars.css?v=c520baab"></noscript>
 </head>
 <body>
     <!-- 滚动容器 - 包含所有页面内容-->
@@ -125,10 +133,17 @@
     </div>
     <!-- APlayer音乐播放器JavaScript库 - 提供播放器功能 -->
     <script src="libs\APlayer.min.js"></script>
-    <!-- 模块化重构后的JavaScript功能文件 -->
-    <script src="js/floatingBox.js?v=5b91d5b6"></script>
-    <script src="js/player.js?v=5b91d5b6"></script>
-    <script src="js/star.js?v=5b91d5b6"></script>
-    <script src="js/main.js?v=5b91d5b6"></script>
+    
+    <!-- 模块化重构后的js文件 -->
+    <!-- 关键js  -->
+    <script src="js/floatingBox.js?v=0f7b3261"></script>
+    <script src="js/main.js?v=fd78b9bd"></script>
+    
+    <!-- 非关键js - 异步加载 -->
+    <link rel="preload" href="js/player.js?v=97a92f7a" as="script" onload="this.onload=null;var s=document.createElement('script');s.src=this.href;document.body.appendChild(s);">
+    <noscript><script src="js/player.js?v=c11c7162"></script></noscript>
+    
+    <link rel="preload" href="js/star.js?v=6b3c7731" as="script" onload="this.onload=null;var s=document.createElement('script');s.src=this.href;document.body.appendChild(s);">
+    <noscript><script src="js/star.js?v=d65d3c47"></script></noscript>
 </body>
 </html>
