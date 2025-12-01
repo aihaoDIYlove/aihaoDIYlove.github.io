@@ -1,4 +1,4 @@
-/* ========================================
+ /* ========================================
    工具函数 - 性能优化
    ======================================== */
 
@@ -672,8 +672,27 @@ function createAPlayer(config, container) {
         audio: audioList
     });
 
+    // 确保 aplayer-withlist 类正确添加
+    ensureAplayerWithlistClass();
+
     container.offsetHeight; // 强制触发重绘
     console.log('APlayer初始化成功！');
+}
+
+// 确保 aplayer-withlist 类正确添加
+function ensureAplayerWithlistClass() {
+    if (window.aplayer && window.aplayer.list && window.aplayer.list.audios) {
+        const audioCount = window.aplayer.list.audios.length;
+        const container = window.aplayer.container;
+
+        if (audioCount > 1 && !container.classList.contains('aplayer-withlist')) {
+            container.classList.add('aplayer-withlist');
+            console.log('手动添加 aplayer-withlist 类，歌曲数量:', audioCount);
+        } else if (audioCount <= 1 && container.classList.contains('aplayer-withlist')) {
+            container.classList.remove('aplayer-withlist');
+            console.log('移除 aplayer-withlist 类，歌曲数量:', audioCount);
+        }
+    }
 }
 
 // 校正初始歌词路径
