@@ -532,13 +532,15 @@ let currentLyricPath = null;
 // 获取默认音乐配置
 function getDefaultMusicConfig() {
     return {
-        playlist: [{
-            name: '无尽幸福',
-            artist: '凌晨一点的莱茵猫',
-            url: 'https://music.163.com/song/media/outer/url?id=2699754024.mp3',
-            cover: 'image/play.png',
-            lrcPath: './lyrics/无尽幸福-歌词.lrc'
-        }],
+        playlist: [
+            {
+                name: '无尽幸福',
+                artist: '凌晨一点的莱茵猫',
+                url: 'https://music.163.com/song/media/outer/url?id=2699754024.mp3',
+                cover: 'image/play.png',
+                lrcPath: './lyrics/无尽幸福-歌词.lrc'
+            }
+        ],
         settings: {
             autoplay: false,
             loop: 'all',
@@ -672,27 +674,8 @@ function createAPlayer(config, container) {
         audio: audioList
     });
 
-    // 确保 aplayer-withlist 类正确添加
-    ensureAplayerWithlistClass();
-
     container.offsetHeight; // 强制触发重绘
     console.log('APlayer初始化成功！');
-}
-
-// 确保 aplayer-withlist 类正确添加
-function ensureAplayerWithlistClass() {
-    if (window.aplayer && window.aplayer.list && window.aplayer.list.audios) {
-        const audioCount = window.aplayer.list.audios.length;
-        const container = window.aplayer.container;
-
-        if (audioCount > 1 && !container.classList.contains('aplayer-withlist')) {
-            container.classList.add('aplayer-withlist');
-            console.log('手动添加 aplayer-withlist 类，歌曲数量:', audioCount);
-        } else if (audioCount <= 1 && container.classList.contains('aplayer-withlist')) {
-            container.classList.remove('aplayer-withlist');
-            console.log('移除 aplayer-withlist 类，歌曲数量:', audioCount);
-        }
-    }
 }
 
 // 校正初始歌词路径
@@ -714,24 +697,27 @@ function correctInitialLyricPath(config) {
     }, { timeout: 1000 });
 }
 
-// 异步初始化播放器主逻辑
-async function initializePlayerCore(config) {
+// 初始化播放器主逻辑
+function initializePlayerCore(config) {
     if (!checkInitConditions()) return;
 
     try {
         const container = document.getElementById('aplayer');
 
-        // 使用 requestAnimationFrame 确保不阻塞页面渲染
-        requestAnimationFrame(() => {
-            createAPlayer(config, container);
+        // 直接创建APlayer实例，配置已经完全加载
+        createAPlayer(config, container);
 
-            // 延迟初始化歌词系统，等待DOM稳定
-            setTimeout(() => {
-                initLyricsDisplay();
-                setupPlayerEvents(config);
-                correctInitialLyricPath(config);
-            }, 100);
-        });
+        // 初始化歌词系统
+        initLyricsDisplay();
+
+        // 设置事件监听
+        setupPlayerEvents(config);
+
+        // 校正歌词路径
+        correctInitialLyricPath(config);
+
+        console.log('播放器初始化流程完成');
+
     } catch (error) {
         console.error('APlayer初始化失败:', error);
     }
@@ -739,22 +725,19 @@ async function initializePlayerCore(config) {
 
 // 初始化音乐播放器
 async function initMusicPlayer() {
-    console.log('开始异步初始化音乐播放器');
+    console.log('开始初始化音乐播放器 - 等待配置加载完成');
 
     try {
-        // 异步加载配置，不阻塞主线程
-        const configPromise = loadMusicConfig();
-
-        // 等待APlayer库加载完成
+        // 先等APlayer库加载完成
         await waitForAPlayer();
+        console.log('APlayer库已加载');
 
-        // 获取配置并初始化
-        const config = await configPromise;
+        // 然后加载音乐配置文件，确保完全获取配置后再初始化
+        const config = await loadMusicConfig();
+        console.log('音乐配置加载完成，歌曲数量:', config.playlist.length);
 
-        // 使用微任务延迟初始化，避免阻塞
-        Promise.resolve().then(() => {
-            initializePlayerCore(config);
-        });
+        // 现在初始化播放器，配置已经准备好了
+        initializePlayerCore(config);
 
     } catch (error) {
         console.error('音乐播放器初始化失败:', error);
