@@ -8,7 +8,7 @@ public\
 │   └── *.json                      # 博客文章文件
 ├── data\                           # 数据文件目录
 │   └── blog-posts.json             # 博客文章索引
-│   └── music-config.json           # 音乐配置文件
+│   └── music-settings.json           # 音乐配置文件
 ├── lyrics\                         # 歌词文件目录 音乐歌词文件 (LRC格式)
 │   └── *.lrc                       # 文章对应的歌词文件
 ├── libs\                           # 静态资源库
