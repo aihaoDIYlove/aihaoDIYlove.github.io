@@ -555,7 +555,7 @@ function getDefaultMusicConfig() {
 // 加载音乐配置文件
 async function loadMusicConfig() {
     try {
-        const response = await fetch('./data/music-config.json');
+        const response = await fetch('./data/music-settings.json');
         if (!response.ok) throw new Error('无法加载音乐配置文件');
 
         musicConfig = await response.json();
