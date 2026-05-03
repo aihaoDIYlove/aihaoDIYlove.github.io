@@ -77,7 +77,8 @@ class TypewriterAnimation {
 const socialLinks = {
     github: 'https://github.com/aihaoDIYlove', // GitHub链接
     bilibili: 'https://space.bilibili.com/62784664', // Bilibili链接
-    mbti: 'https://mbti.dreamripples.icu/' // mbti选择器链接
+    mbti: 'https://mbti.dreamripples.icu/', // mbti选择器链接
+    yi: 'https://yi.dreamripples.icu/' // yi链接
 };
 
 // 打字机效果和社交链接初始化
@@ -106,12 +107,8 @@ function initFloatingBoxFeatures() {
         bilibiliLink.rel = 'noopener noreferrer';
     }
 
-    const mbtiLink = document.querySelector('#mbti-link');
-    if (mbtiLink) {
-        mbtiLink.href = socialLinks.mbti;
-        mbtiLink.target = '_blank';
-        mbtiLink.rel = 'noopener noreferrer';
-    }
+    // 初始化项目链接下拉菜单
+    initLinkDropdown();
 
     // 初始化文章列表
     initArticleList();
@@ -120,6 +117,40 @@ function initFloatingBoxFeatures() {
     initMobileArticleListControl();
 
     console.log('浮动框功能初始化完成');
+}
+
+// 初始化项目链接下拉菜单
+function initLinkDropdown() {
+    const dropdownBtn = document.querySelector('#mbti-link');
+    const dropdownMenu = document.querySelector('#dropdown-menu');
+    const mbtiDropdownLink = document.querySelector('#mbti-dropdown-link');
+    const yiDropdownLink = document.querySelector('#yi-dropdown-link');
+
+    if (!dropdownBtn || !dropdownMenu) return;
+
+    // 设置链接地址
+    if (mbtiDropdownLink) mbtiDropdownLink.href = socialLinks.mbti;
+    if (yiDropdownLink) yiDropdownLink.href = socialLinks.yi;
+
+    // 切换下拉菜单
+    dropdownBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownMenu.classList.toggle('show');
+    });
+
+    // 点击外部关闭菜单
+    document.addEventListener('click', (e) => {
+        if (!dropdownMenu.contains(e.target) && e.target !== dropdownBtn) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    // 点击菜单项后关闭菜单
+    dropdownMenu.querySelectorAll('.dropdown-item').forEach(item => {
+        item.addEventListener('click', () => {
+            dropdownMenu.classList.remove('show');
+        });
+    });
 }
 
 /* ========================================

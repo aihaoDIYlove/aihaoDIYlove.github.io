@@ -234,6 +234,57 @@ body {
     color: #0084ff;
     background-color: #1a1a1a;
 }
+
+/* ========================================
+   项目链接下拉菜单
+   ======================================== */
+.link-dropdown {
+    position: relative;
+}
+
+.link-dropdown .social-link {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    transform: translateY(8px);
+    opacity: 0;
+    visibility: hidden;
+    min-width: 120px;
+    background-color: rgba(26, 26, 26, 0.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border: 2px solid #333;
+    border-radius: 12px;
+    padding: 6px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 8px 20px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    transition: background-color 0.15s ease;
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
 /* 移动端基础布局调整 */
 @media screen and (max-width: 540px) {
     .header {
