@@ -78,7 +78,8 @@ const socialLinks = {
     github: 'https://github.com/aihaoDIYlove', // GitHub链接
     bilibili: 'https://space.bilibili.com/62784664', // Bilibili链接
     mbti: 'https://mbti.dreamripples.icu/', // mbti选择器链接
-    yi: 'https://yi.dreamripples.icu/' // yi链接
+    yi: 'https://yi.dreamripples.icu/', // yi链接
+    sky: 'https://sky.dreamripples.icu/' // sky链接
 };
 
 // 打字机效果和社交链接初始化
@@ -125,12 +126,14 @@ function initLinkDropdown() {
     const dropdownMenu = document.querySelector('#dropdown-menu');
     const mbtiDropdownLink = document.querySelector('#mbti-dropdown-link');
     const yiDropdownLink = document.querySelector('#yi-dropdown-link');
+    const skyDropdownLink = document.querySelector('#sky-dropdown-link');
 
     if (!dropdownBtn || !dropdownMenu) return;
 
     // 设置链接地址
     if (mbtiDropdownLink) mbtiDropdownLink.href = socialLinks.mbti;
     if (yiDropdownLink) yiDropdownLink.href = socialLinks.yi;
+    if (skyDropdownLink) skyDropdownLink.href = socialLinks.sky;
 
     // 切换下拉菜单
     dropdownBtn.addEventListener('click', (e) => {
